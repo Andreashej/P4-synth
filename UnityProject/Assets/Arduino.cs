@@ -5,7 +5,7 @@ using System.IO.Ports;
 public class Arduino : MonoBehaviour {
 
     //Serial port values
-    public string PortName = "COM5";
+    public string PortName = "COM4";
     public int BaudRate = 115200;
     public char StartFlag = '#';
     public int PollingRate = 100;
@@ -21,9 +21,7 @@ public class Arduino : MonoBehaviour {
     public string NewestIncomingData = "";
     public string NewestOutgoingData = "";
     public uint ArduinoMillis = 0;
-    public int RawEDA = 0;
-    public int RawIBI = 0;
-    public int RawDistance = 0;
+    public float freq = 0;
 
     //Event handler
     public delegate void NewDataEventHandler(Arduino arduino);
@@ -55,10 +53,8 @@ public class Arduino : MonoBehaviour {
         string[] values = serialInput.Split('\t');  //Split the string between the chosen delimiter (tab)
 
         ArduinoMillis = uint.Parse(values[0]);      //Pass the first value to an unsigned integer
-        RawEDA = int.Parse(values[1]);              //Pass the second value to an integer
-        RawIBI = int.Parse(values[2]);
-        RawDistance = int.Parse(values[3]);
-        Debug.Log(RawEDA);
+        freq = float.Parse(values[1]);              //Pass the second value to an integer
+        Debug.Log(freq);
         //Feel free to add new variables (both here and in the Arduino script).
 
 
@@ -75,7 +71,7 @@ public class Arduino : MonoBehaviour {
         //    doSomething();
         //  }
     }
-
+ 
     private const int outputCount = 7; //Number of outputs! (Has to match with Arduino script)
     private byte[] outputBuffer = new byte[outputCount];
     void OutputDataToArduino()
@@ -117,7 +113,7 @@ public class Arduino : MonoBehaviour {
             Debug.LogError("arduino.Write timed out? Have you selected the correct BaudRate?");
         }
     }
-
+  
 
 
     // ----- SERIAL COMMUNICATION ----- //
