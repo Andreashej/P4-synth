@@ -1,0 +1,32 @@
+#N canvas 9 211 591 442 10;
+#X floatatom 223 50 5 0 0 0 - - -;
+#X obj 110 125 spigot;
+#X floatatom 110 103 5 0 0 0 note_1 - -;
+#X obj 226 -3 hsl 128 15 0 10 0 0 empty \$0-selector empty -2 -8 0
+10 -262144 -1 -1 0 0;
+#X floatatom 54 142 5 0 0 0 - - -;
+#X obj 110 81 == 5;
+#X obj 223 126 spigot;
+#X floatatom 223 104 5 0 0 0 note_2 - -;
+#X floatatom 167 143 5 0 0 0 - - -;
+#X obj 223 80 == 10;
+#X obj 223 26 int;
+#X obj 111 158 outlet;
+#X obj 223 159 outlet;
+#X obj 6 28 hsl 128 15 0 10 0 0 \$0-selector empty selector -2 8 0
+10 -262144 -1 -1 0 1;
+#X connect 0 0 5 0;
+#X connect 0 0 9 0;
+#X connect 1 0 4 0;
+#X connect 2 0 1 1;
+#X connect 2 0 1 0;
+#X connect 3 0 10 0;
+#X connect 4 0 11 0;
+#X connect 5 0 2 0;
+#X connect 6 0 8 0;
+#X connect 7 0 6 1;
+#X connect 7 0 6 0;
+#X connect 8 0 12 0;
+#X connect 9 0 7 0;
+#X connect 10 0 0 0;
+#X coords 0 -1 1 1 140 50 1 0 0;

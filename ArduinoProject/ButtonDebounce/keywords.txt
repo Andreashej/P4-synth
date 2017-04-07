@@ -1,2 +1,0 @@
-Button	KEYWORD1
-state	KEYWORD2
