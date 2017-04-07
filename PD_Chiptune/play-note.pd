@@ -1,14 +1,14 @@
 #N canvas 1240 22 413 734 10;
 #X floatatom -104 -54 5 0 0 0 - - -;
 #X obj -101 -90 hsl 128 15 50 800 0 0 empty empty note_1 -2 -8 0 10
--262144 -1 -1 3600 1;
+-262144 -1 -1 3500 1;
 #X obj -105 13 *~;
 #X obj -105 44 dac~;
 #X obj -25 -71 play-short;
 #X obj -104 -29 osc~ 0;
 #X floatatom -105 132 5 0 0 0 - - -;
 #X obj -102 96 hsl 128 15 50 800 0 0 empty empty note_2 -2 -8 0 10
--262144 -1 -1 9900 1;
+-262144 -1 -1 8300 1;
 #X obj -106 199 *~;
 #X obj -106 230 dac~;
 #X obj -105 157 osc~ 0;
