@@ -1,22 +1,24 @@
-#N canvas 9 211 591 442 10;
-#X floatatom 223 50 5 0 0 0 - - -;
-#X obj 110 125 spigot;
-#X floatatom 110 103 5 0 0 0 note_1 - -;
-#X obj 226 -3 hsl 128 15 0 10 0 0 empty \$0-selector empty -2 -8 0
-10 -262144 -1 -1 6500 0;
-#X floatatom 54 142 5 0 0 0 - - -;
-#X obj 110 81 == 5;
-#X obj 223 126 spigot;
-#X floatatom 223 104 5 0 0 0 note_2 - -;
-#X floatatom 167 143 5 0 0 0 - - -;
-#X obj 223 80 == 10;
-#X obj 223 26 int;
-#X obj 111 158 outlet;
-#X obj 223 159 outlet;
-#X obj 6 28 hsl 128 15 0 10 0 0 \$0-selector empty selector -2 8 0
-10 -262144 -1 -1 6500 1;
-#X text 55 11 #1↓;
-#X text 117 12 #2↓;
+#N canvas 493 323 591 442 10;
+#X floatatom 225 150 5 0 0 0 - - -;
+#X obj 112 225 spigot;
+#X floatatom 112 203 5 0 0 0 note_1 - -;
+#X obj 228 97 hsl 128 15 0 10 0 0 empty \$0-selector selector -2 -8
+0 10 -262144 -1 -1 7700 0;
+#X floatatom 56 242 5 0 0 0 - - -;
+#X obj 112 181 == 5;
+#X obj 225 226 spigot;
+#X floatatom 225 204 5 0 0 0 note_2 - -;
+#X floatatom 169 243 5 0 0 0 - - -;
+#X obj 225 180 == 10;
+#X obj 225 126 int;
+#X obj 113 258 outlet;
+#X obj 225 259 outlet;
+#X obj 6 29 hsl 128 15 0 10 0 0 \$0-selector empty selector -2 8 0
+10 -262144 -1 -1 7700 1;
+#X text 55 12 #1↓;
+#X text 117 13 #2↓;
+#X floatatom 103 49 5 0 0 0 - - -;
+#X obj 3 50 int;
 #X connect 0 0 5 0;
 #X connect 0 0 9 0;
 #X connect 1 0 4 0;
@@ -31,4 +33,6 @@
 #X connect 8 0 12 0;
 #X connect 9 0 7 0;
 #X connect 10 0 0 0;
-#X coords 0 -1 1 1 140 50 1 0 0;
+#X connect 13 0 17 0;
+#X connect 17 0 16 0;
+#X coords 0 -1 1 1 140 70 1 0 0;
