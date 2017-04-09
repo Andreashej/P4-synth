@@ -1,4 +1,4 @@
-#N canvas 753 28 954 862 10;
+#N canvas 814 31 954 862 10;
 #X obj -83 -48 play-short;
 #X obj -83 -188 choose-note;
 #X text 383 44 The different notes and the duration is made in the

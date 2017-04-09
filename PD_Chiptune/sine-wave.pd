@@ -1,4 +1,4 @@
-#N canvas 190 436 659 516 10;
+#N canvas 928 322 659 516 10;
 #X obj 139 79 line~;
 #X floatatom 139 53 5 0 0 0 - - -;
 #X obj 169 18 0;
@@ -26,8 +26,10 @@ This way to note played for a small amount of time. The bang also activates
 and deactivates a metro which writes the wave produced to the tables
 on the left.;
 #X obj 36 -13 inlet;
-#X obj 34 128 outlet~;
+#X obj 35 171 outlet~;
 #X obj 89 128 outlet;
+#X obj 36 148 quantize~;
+#X obj 46 129 inlet;
 #X connect 0 0 7 1;
 #X connect 1 0 0 0;
 #X connect 2 0 1 0;
@@ -39,9 +41,11 @@ on the left.;
 #X connect 4 0 11 0;
 #X connect 5 0 4 0;
 #X connect 6 0 8 0;
-#X connect 7 0 15 0;
+#X connect 7 0 17 0;
 #X connect 8 0 7 0;
 #X connect 9 0 16 0;
 #X connect 10 0 9 0;
 #X connect 11 0 2 0;
 #X connect 14 0 6 0;
+#X connect 17 0 15 0;
+#X connect 18 0 17 0;
