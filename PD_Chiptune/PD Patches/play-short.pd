@@ -1,0 +1,181 @@
+#N canvas 751 46 937 907 10;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array Sinewave 100 float 3;
+#A 0 0.7 0.65 0.65 0.6 0.55 0.5 0.45 0.4 0.35 0.3 0.25 0.2 0.15 0.05
+0 0 -0.05 -0.1 -0.15 -0.2 -0.25 -0.3 -0.35 -0.4 -0.45 -0.5 -0.55 -0.6
+-0.65 -0.7 -0.75 -0.75 -0.8 -0.85 -0.85 -0.9 -0.9 -0.9 -0.95 -0.95
+-0.95 -0.95 -0.95 -0.95 -0.95 -0.95 -0.95 -0.95 -0.95 -0.9 -0.9 -0.85
+-0.85 -0.8 -0.8 -0.75 -0.7 -0.65 -0.65 -0.6 -0.55 -0.5 -0.45 -0.4 -0.35
+-0.3 -0.25 -0.2 -0.15 -0.05 0 0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4
+0.45 0.5 0.55 0.6 0.65 0.7 0.75 0.75 0.8 0.85 0.85 0.9 0.9 0.9 0.95
+0.95 0.95 0.95 0.95 0.95;
+#X coords 0 1 100 -1 200 140 1 0 0;
+#X restore -31 -131 graph;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array Sawtoothwave 100 float 3;
+#A 0 0.05 0.1 0.1 0.1 0.1 0.1 0.15 0.15 0.15 0.15 0.15 0.15 0.2 0.2
+0.2 0.2 0.2 0.25 0.25 0.25 0.25 0.25 0.25 0.3 0.3 0.3 0.3 0.3 0.3 0.35
+0.35 0.35 0.35 0.35 0.4 0.4 0.4 0.4 0.4 0.4 0.45 0.45 0.45 0.45 0.45
+0.5 0.5 0.5 0.5 0.5 0.5 0.55 0.55 0.55 0.55 0.55 0.55 0.6 0.6 0.6 0.6
+0.6 0.65 0.65 0.65 0.65 0.65 0.65 0.7 0.7 0.7 0.7 0.7 0.75 0.75 0.75
+0.75 0.75 0.75 0.8 0.8 0.8 0.8 0.8 0.8 0.85 0.85 0.85 0.85 0.85 0.9
+0.9 0.9 0.9 0.9 0.9 0.95 0.95 0.95 0.95;
+#X coords 0 1 100 -1 200 140 1 0 0;
+#X restore -30 26 graph;
+#X obj 29 -235 hsl 192 23 0 800 0 0 \$1-tone \$1-unitytone Master_frequency
+-2 -8 0 10 -258113 -33289 -1 2459 1;
+#X obj -26 -185 hsl 128 15 0 800 0 0 \$1-tone \$1-tone Master_frequency
+-2 8 0 10 -262144 -258113 -1 1635 1;
+#X floatatom 126 -185 5 0 0 0 - - -;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array Pulsewave 100 float 3;
+#A 0 1 1 0 1 0 1 1 0 1 1 1 0 1 1 0 1 1 0 1 1 1 1 0 1 1 0 1 1 0 1 1
+0 1 1 0 1 1 0 1 1 1 1 1 1 0 1 1 0 1 1 0 1 1 0 1 1 0 1 1 0 1 1 0 1 1
+1 0 1 0 1 1 0 1 1 1 0 1 1 0 1 1 0 1 1 1 1 0 1 1 0 1 1 0 1 1 0 1 1 0
+1;
+#X coords 0 1 100 -1 200 140 1;
+#X restore 181 -130 graph;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array Squarewave 100 float 3;
+#A 0 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 -0.3 -0.3
+-0.3 -0.3 -0.3 -0.3 -0.3 -0.3 -0.3 -0.3 -0.3 -0.3 -0.3 -0.3 -0.3 -0.3
+-0.3 -0.3 -0.3 -0.3 -0.3 -0.3 -0.3 -0.3 -0.3 -0.3 -0.3 -0.3 -0.3 -0.3
+-0.3 -0.3 -0.3 -0.3 -0.3 -0.3 -0.3 -0.3 -0.3 -0.3 -0.3 -0.3 -0.3 -0.3
+-0.3 -0.3 -0.3 -0.3 -0.3 -0.3 -0.3 -0.3 -0.3 -0.3 -0.3 -0.3 0.3 0.3
+0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3
+0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3;
+#X coords 0 1 99 -1 200 140 1;
+#X restore 182 25 graph;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array Pulsewave2 100 float 3;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.75 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0;
+#X coords 0 1 99 -1 200 140 1;
+#X restore 183 186 graph;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array Trianglewave 100 float 3;
+#A 0 0.2 0.2 0.2 0.2 0.25 0.25 0.25 0.25 0.3 0.3 0.3 0.3 0.35 0.35
+0.35 0.35 0.4 0.4 0.4 0.4 0.45 0.45 0.45 0.45 0.5 0.5 0.5 0.5 0.55
+0.55 0.55 0.55 0.6 0.6 0.6 0.6 0.65 0.65 0.65 0.65 0.65 0.65 0.65 0.65
+0.6 0.6 0.6 0.6 0.55 0.55 0.55 0.55 0.5 0.5 0.5 0.5 0.45 0.45 0.45
+0.45 0.4 0.4 0.4 0.4 0.35 0.35 0.35 0.35 0.3 0.3 0.3 0.3 0.25 0.25
+0.25 0.25 0.2 0.2 0.2 0.2 0.15 0.15 0.15 0.15 0.1 0.1 0.1 0.1 0.05
+0.05 0.05 0.05 0 0 0 0 0 0 0 0;
+#X coords 0 1 99 -1 200 140 1;
+#X restore -28 185 graph;
+#X obj 416 368 triangle-wave;
+#X obj 491 341 inlet;
+#X obj 416 231 vsl 15 128 0 800 0 0 empty \$1-tone empty 0 -9 0 10
+-262144 -1 -1 1635 1;
+#X obj 492 399 tabwrite~ Trianglewave;
+#X obj 467 -80 inlet;
+#X obj 416 -192 vsl 15 128 0 800 0 0 empty \$1-tone empty 0 -9 0 10
+-262144 -1 -1 1635 1;
+#X obj 417 -23 dac~;
+#X obj 416 -55 sine-wave;
+#X obj 467 -23 tabwrite~ Sinewave;
+#X obj 491 126 inlet;
+#X obj 416 14 vsl 15 128 0 800 0 0 empty \$1-tone empty 0 -9 0 10 -262144
+-1 -1 1635 1;
+#X obj 416 151 sawtooth-wave;
+#X obj 491 183 tabwrite~ Sawtoothwave;
+#X obj 681 -83 inlet;
+#X obj 624 -194 vsl 15 128 0 800 0 0 empty \$1-tone empty 0 -9 0 10
+-262144 -1 -1 1635 1;
+#X obj 624 -57 pulse-wave;
+#X obj 681 -24 tabwrite~ Pulsewave;
+#X obj 704 122 inlet;
+#X obj 641 11 vsl 15 128 0 800 0 0 empty \$1-tone empty 0 -9 0 10 -262144
+-1 -1 1635 1;
+#X obj 641 148 square-wave;
+#X obj 704 181 tabwrite~ Squarewave;
+#X obj 706 338 inlet;
+#X obj 643 227 vsl 15 128 0 800 0 0 empty \$1-tone empty 0 -9 0 10
+-262144 -1 -1 1635 1;
+#X obj 643 364 pulse-wave2;
+#X obj 706 397 tabwrite~ Pulsewave2;
+#X text 228 -240 The master frequency slider. It decides the frequency
+for all the tone generators below \, by sending a number to the labeled
+number block.;
+#X obj 625 -23 dac~;
+#X obj 416 184 dac~;
+#X obj 641 181 dac~;
+#X obj 417 399 dac~;
+#X obj 642 398 dac~;
+#X msg 761 -195 8;
+#X msg 793 -194 16;
+#X floatatom 826 -194 5 0 64 0 - #1-bitslider -;
+#X obj 441 -103 r bits;
+#X obj 761 -171 s bits;
+#X obj 652 -105 r bits;
+#X obj 453 100 r bits;
+#X obj 672 97 r bits;
+#X obj 453 318 r bits;
+#X obj 674 315 r bits;
+#X obj 761 -220 bng 15 250 50 0 empty \$1-8bit empty 17 7 0 10 -262144
+-1 -1;
+#X obj 793 -220 bng 15 250 50 0 empty \$1-16bit empty 17 7 0 10 -262144
+-1 -1;
+#X obj 212 -183 bng 20 250 50 0 \$1-8bit empty 8-bit -10 -7 0 10 -257985
+-1 -1;
+#X obj 250 -183 bng 20 250 50 0 \$1-16bit empty 16-bit -10 -7 0 10
+-257985 -1 -1;
+#X obj 289 -183 hsl 60 20 0 64 0 0 empty empty Bit_slider -2 -8 0 10
+-257985 -1 -1 1900 1;
+#X floatatom 357 -182 5 0 0 0 - - #1-bitslider;
+#X obj 358 -160 int;
+#X obj -38 -252 inlet;
+#X connect 2 0 4 0;
+#X connect 9 0 12 0;
+#X connect 9 0 38 0;
+#X connect 9 0 38 1;
+#X connect 9 1 12 0;
+#X connect 10 0 9 2;
+#X connect 11 0 9 0;
+#X connect 13 0 16 2;
+#X connect 14 0 16 0;
+#X connect 16 0 17 0;
+#X connect 16 0 15 0;
+#X connect 16 0 15 1;
+#X connect 16 1 17 0;
+#X connect 18 0 20 2;
+#X connect 19 0 20 0;
+#X connect 20 0 21 0;
+#X connect 20 0 36 0;
+#X connect 20 0 36 1;
+#X connect 20 1 21 0;
+#X connect 22 0 24 2;
+#X connect 23 0 24 0;
+#X connect 24 0 25 0;
+#X connect 24 0 35 0;
+#X connect 24 0 35 1;
+#X connect 24 1 25 0;
+#X connect 26 0 28 2;
+#X connect 27 0 28 0;
+#X connect 28 0 29 0;
+#X connect 28 0 37 0;
+#X connect 28 0 37 1;
+#X connect 28 1 29 0;
+#X connect 30 0 32 2;
+#X connect 31 0 32 0;
+#X connect 32 0 33 0;
+#X connect 32 0 39 0;
+#X connect 32 0 39 1;
+#X connect 32 1 33 0;
+#X connect 40 0 44 0;
+#X connect 41 0 44 0;
+#X connect 42 0 44 0;
+#X connect 43 0 16 1;
+#X connect 45 0 24 1;
+#X connect 46 0 20 1;
+#X connect 47 0 28 1;
+#X connect 48 0 9 1;
+#X connect 49 0 32 1;
+#X connect 50 0 40 0;
+#X connect 51 0 41 0;
+#X connect 54 0 56 0;
+#X connect 56 0 55 0;
+#X connect 57 0 2 0;
+#X coords 0 -1 1 1 440 550 1 -40 -200;
