@@ -4,28 +4,29 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class sendFreq : MonoBehaviour {
-    public float frequency;
+    float value;
+    public string prefix;
     Slider slider;
+    
 
     // Use this for initialization
     void Start () {
-		slider = GetComponent<Slider>();
+        slider = GetComponent<Slider>();
     }
 
     // Update is called once per frame
     void Update () {
         //Arduino.NewDataEvent += newData;
 
-        tcpserver.PDSend("/freq " + slider.value);
     }
 
-    void TaskOnClick()
+    public void setValue()
     {
-        Debug.Log("You have clicked the button!");
-        tcpserver.PDSend("/freq " + 400);
+        value = slider.value;
+        tcpserver.PDSend(prefix + " " + value);
     }
 
     void newData(Arduino arduino) {
-        slider.value = arduino.freq;
+        value = arduino.freq;
     }
 }

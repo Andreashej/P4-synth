@@ -1,6 +1,6 @@
 #N canvas 952 0 958 971 10;
 #X obj -87 94 play-short;
-#X obj -87 -46 choose-note;
+#X obj -69 -45 choose-note;
 #X text 367 44 The different notes and the duration is made in the
 patch "play-short". The patch here has a master_frequency slider \,
 which decides what frequency the oscillators are operating at. A number
@@ -20,7 +20,7 @@ based on an input.;
 #X floatatom -87 -103 5 0 0 0 - - -;
 #X obj 84 -69 dsp;
 #X obj 84 -105 tgl 30 0 empty empty ON-OFF 0 -7 0 10 -262144 -1 -1
-0 13.5;
+1 1;
 #X obj -87 -139 OSCroute /freq /selector /dsp;
 #X floatatom -30 -104 5 0 0 0 - - -;
 #X obj -30 -83 int;
@@ -37,6 +37,6 @@ based on an input.;
 #X connect 11 0 10 0;
 #X connect 12 0 9 0;
 #X connect 12 1 13 0;
-#X connect 12 3 11 0;
+#X connect 12 2 11 0;
 #X connect 13 0 14 0;
 #X connect 14 0 1 0;
