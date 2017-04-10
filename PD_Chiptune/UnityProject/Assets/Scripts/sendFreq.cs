@@ -16,7 +16,7 @@ public class sendFreq : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        //Arduino.NewDataEvent += newData;
+        Arduino.NewDataEvent += newData;
 
     }
 
@@ -27,6 +27,15 @@ public class sendFreq : MonoBehaviour {
     }
 
     void newData(Arduino arduino) {
-        value = arduino.freq;
+        switch(prefix) {
+            case "/freq": 
+                slider.value = arduino.freq;
+                break;
+            case "/selector":
+                //slider.value = arduino.selector;
+                break;
+            default:;
+                break;
+        }
     }
 }
