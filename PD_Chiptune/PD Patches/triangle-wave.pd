@@ -1,4 +1,4 @@
-#N canvas 776 215 591 569 10;
+#N canvas 288 348 591 569 10;
 #X obj 172 48 bng 15 250 50 0 empty empty note_3 17 7 0 10 -262144
 -1 -1;
 #X floatatom 88 115 5 0 0 2 frequency - -;
@@ -37,7 +37,7 @@
 #X obj 412 223 line~;
 #X obj 242 98 0;
 #X obj 212 98 1;
-#X obj 212 128 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 212 128 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
 1;
 #X obj 242 22 inlet;
 #X obj 242 48 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
