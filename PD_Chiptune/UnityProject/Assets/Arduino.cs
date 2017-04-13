@@ -55,7 +55,7 @@ public class Arduino : MonoBehaviour {
 
         ArduinoMillis = uint.Parse(values[0]);      //Pass the first value to an unsigned integer
         freq = float.Parse(values[1]);              //Pass the second value to an integer
-        //selector = int.Parse(values[2]);
+        selector = int.Parse(values[2]);
 
 
         //When ever new data arrives, the scripts fires an event to any scripts that are subscribed, to let them know there is new data available (e.g. my Arduino Logger script).
