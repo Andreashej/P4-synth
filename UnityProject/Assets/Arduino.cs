@@ -5,15 +5,14 @@ using System.IO.Ports;
 public class Arduino : MonoBehaviour {
 
     //Serial port values
-    public string PortName = "COM5";
+	public string PortName = "/dev/cu.usbmodem1421";
     public int BaudRate = 115200;
     public char StartFlag = '#';
     public int PollingRate = 100;
     public int PackagesLost = 0;
     public int readTimeouts = 0;
     public bool ParseIncomingData = true;
-    private SerialPort arduino;    
-    private int writeTimeouts = 0;
+    private SerialPort arduino;
     private int retries = 0;
     private IEnumerator SerialUpdate;
 
@@ -24,6 +23,13 @@ public class Arduino : MonoBehaviour {
     public int RawEDA = 0;
     public int RawIBI = 0;
     public int RawDistance = 0;
+	public int RotX = 0;
+	public int RotY = 0;
+	public int RotZ = 0;
+
+	private float ColorR = 0;
+	private float ColorG = 0;
+	private float ColorB = 0;
 
     //Event handler
     public delegate void NewDataEventHandler(Arduino arduino);
@@ -55,10 +61,17 @@ public class Arduino : MonoBehaviour {
         string[] values = serialInput.Split('\t');  //Split the string between the chosen delimiter (tab)
 
         ArduinoMillis = uint.Parse(values[0]);      //Pass the first value to an unsigned integer
-        RawEDA = int.Parse(values[1]);              //Pass the second value to an integer
-        RawIBI = int.Parse(values[2]);
-        RawDistance = int.Parse(values[3]);
-        Debug.Log(RawEDA);
+        RotX = int.Parse(values[3]);              //Pass the second value to an integer
+        RotY = int.Parse(values[2]);
+        RotZ = int.Parse(values[1]);
+
+		ColorR = Mathf.Lerp (0, 1, Mathf.InverseLerp (-90, 90, RotX));
+		ColorG = Mathf.Lerp (0, 1, Mathf.InverseLerp (-90, 90, RotY));
+		ColorB = Mathf.Lerp (0, 1, Mathf.InverseLerp (-180, 180, RotZ));
+
+		transform.eulerAngles = new Vector3 (RotX, RotY, RotZ);
+		gameObject.GetComponent<Renderer> ().material.color = new Color (ColorR, ColorG, ColorB);
+
         //Feel free to add new variables (both here and in the Arduino script).
 
 
