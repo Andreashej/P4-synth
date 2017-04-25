@@ -110,6 +110,9 @@ void setup() {
 
     // configure LED for output
     pinMode(LED_PIN, OUTPUT);
+
+    // Analog Input for Flexion Sensor
+    pinMode(A0, INPUT);
 }
 
 void loop() {
@@ -187,6 +190,8 @@ void SerialOutput() {
   Serial.print(rotY);       //...
   Serial.print(Delimiter);
   Serial.print(rotZ);
+  Serial.print(Delimiter);
+  Serial.print(analogRead(A0));
   Serial.println();           // Write endflag '\n' to indicate end of package
 }
 
