@@ -40,7 +40,16 @@ unsigned long serialLastOutput = 0;
 const char StartFlag = '#';
 const String Delimiter = "\t";
 
-
+int TTL_PIN = 11;
+int MEASURE_PIN = 3;
+unsigned long pause = 60000;
+volatile unsigned long trigger;
+unsigned long currentMillis;
+unsigned long previousMillis;
+const long interval = 1000;
+volatile double distance;
+float freq;
+int dutycycle;
 
 // indicates whether MPU interrupt pin has gone high
 volatile bool mpuInterrupt = false;     
@@ -113,6 +122,10 @@ void setup() {
 
     // Analog Input for Flexion Sensor
     pinMode(A0, INPUT);
+
+    //PWM and echo pins for ultrasonic
+    pinMode(TTL_PIN, OUTPUT);
+    pinMode(MEASURE_PIN, INPUT);
 }
 
 void loop() {
@@ -168,11 +181,49 @@ void loop() {
 
         // Indicate activity with LED BLINK
         blinkState = !blinkState;
-        digitalWrite(LED_PIN, blinkState);
-
-        //Check if it is time to send data to Unity
-        SerialOutput();
+        digitalWrite(LED_PIN, blinkState);    
     }
+
+    digitalWrite(TTL_PIN, HIGH);
+    delayMicroseconds(10);
+    trigger = micros();
+    digitalWrite(TTL_PIN, LOW);
+    delayMicroseconds(pause-10);
+  
+    attachInterrupt(digitalPinToInterrupt(MEASURE_PIN), triggered, HIGH);
+
+    if (distance < 60) {
+      freq = c[4];
+    } 
+    if ( distance > 60 ) {
+      freq = d[4];
+    } 
+    if ( distance > 63 ) {
+      freq = e[4];
+    } 
+    if ( distance > 66 ) {
+      freq = f[4];
+    } 
+    if ( distance > 69 ) {
+      freq = g[4];
+    } 
+    if ( distance > 72 ) {
+      freq = a[4];
+    } 
+    if ( distance > 75 ) {
+      freq = b[4];
+    } 
+    if ( distance > 78 ) {
+      freq = c[5];
+    }
+    
+    //Check if it is time to send data to Unity
+    SerialOutput();
+}
+
+void triggered() {
+   unsigned long echo = micros()-trigger;
+   distance = echo / 58;
 }
 
 void SerialOutput() {
@@ -192,6 +243,8 @@ void SerialOutput() {
   Serial.print(rotZ);
   Serial.print(Delimiter);
   Serial.print(analogRead(A0));
+  Serial.print(Delimiter);    //Delimiter used to split values
+  Serial.print(freq);         //Write a value
   Serial.println();           // Write endflag '\n' to indicate end of package
 }
 
