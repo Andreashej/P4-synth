@@ -1,0 +1,7 @@
+diff a/UnityProject/.vscode/settings.json b/UnityProject/.vscode/settings.json	(rejected hunks)
+@@ -0,4 +0,5 @@
+ {
++    "files.exclude":
+     {
+         "**/.DS_Store":true,
+         "**/.git":true,
