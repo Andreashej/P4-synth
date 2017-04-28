@@ -1,0 +1,42 @@
+#N canvas 249 299 705 335 10;
+#X obj 103 97 phasor~;
+#X obj 102 145 *~ 2;
+#X obj 102 169 -~ 1;
+#X obj 102 122 expr~ $v1 > 0.5;
+#X obj 187 9 bng 15 250 50 0 empty empty note_3 17 7 0 10 -262144 -1
+-1;
+#X obj 187 -16 inlet;
+#X floatatom 103 76 5 0 0 2 frequency - -;
+#X obj 103 41 inlet;
+#X obj 248 53 0;
+#X obj 218 53 1;
+#X obj 218 83 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 248 -18 inlet;
+#X obj 248 8 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 199 140 metro 100;
+#X obj 102 196 *~;
+#X obj 102 266 outlet~;
+#X obj 199 222 outlet;
+#X obj 103 242 quantize~;
+#X obj 126 222 inlet;
+#X connect 0 0 3 0;
+#X connect 1 0 2 0;
+#X connect 2 0 14 0;
+#X connect 3 0 1 0;
+#X connect 4 0 6 0;
+#X connect 4 0 9 0;
+#X connect 5 0 4 0;
+#X connect 6 0 0 0;
+#X connect 7 0 6 0;
+#X connect 8 0 10 0;
+#X connect 9 0 10 0;
+#X connect 10 0 14 1;
+#X connect 10 0 13 0;
+#X connect 11 0 12 0;
+#X connect 12 0 8 0;
+#X connect 13 0 16 0;
+#X connect 14 0 17 0;
+#X connect 17 0 15 0;
+#X connect 18 0 17 0;

@@ -5,7 +5,11 @@ using System.IO.Ports;
 public class Arduino : MonoBehaviour {
 
     //Serial port values
+<<<<<<< HEAD:UnityProject/Assets/Arduino.cs
 	public string PortName = "/dev/cu.usbmodem1421";
+=======
+    public string PortName = "COM4";
+>>>>>>> PureData_chiptune:PD_Chiptune/UnityProject/Assets/Arduino.cs
     public int BaudRate = 115200;
     public char StartFlag = '#';
     public int PollingRate = 100;
@@ -20,6 +24,7 @@ public class Arduino : MonoBehaviour {
     public string NewestIncomingData = "";
     public string NewestOutgoingData = "";
     public uint ArduinoMillis = 0;
+<<<<<<< HEAD:UnityProject/Assets/Arduino.cs
     public int RawEDA = 0;
     public int RawIBI = 0;
     public int RawDistance = 0;
@@ -32,6 +37,10 @@ public class Arduino : MonoBehaviour {
 	private float ColorR = 0;
 	private float ColorG = 0;
 	private float ColorB = 0;
+=======
+    public float freq = 0;
+    public int selector = 0;
+>>>>>>> PureData_chiptune:PD_Chiptune/UnityProject/Assets/Arduino.cs
 
     //Event handler
     public delegate void NewDataEventHandler(Arduino arduino);
@@ -63,6 +72,7 @@ public class Arduino : MonoBehaviour {
         string[] values = serialInput.Split('\t');  //Split the string between the chosen delimiter (tab)
 
         ArduinoMillis = uint.Parse(values[0]);      //Pass the first value to an unsigned integer
+<<<<<<< HEAD:UnityProject/Assets/Arduino.cs
         RotX = int.Parse(values[3]);              //Pass the second value to an integer
         RotY = int.Parse(values[2]);
         RotZ = int.Parse(values[1]);
@@ -77,6 +87,10 @@ public class Arduino : MonoBehaviour {
 		gameObject.GetComponent<Renderer> ().material.color = new Color (ColorR, ColorG, ColorB);
 
         //Feel free to add new variables (both here and in the Arduino script).
+=======
+        freq = float.Parse(values[1]);              //Pass the second value to an integer
+        selector = int.Parse(values[2]);
+>>>>>>> PureData_chiptune:PD_Chiptune/UnityProject/Assets/Arduino.cs
 
 
         //When ever new data arrives, the scripts fires an event to any scripts that are subscribed, to let them know there is new data available (e.g. my Arduino Logger script).
@@ -92,7 +106,7 @@ public class Arduino : MonoBehaviour {
         //    doSomething();
         //  }
     }
-
+ 
     private const int outputCount = 7; //Number of outputs! (Has to match with Arduino script)
     private byte[] outputBuffer = new byte[outputCount];
     void OutputDataToArduino()
@@ -134,7 +148,7 @@ public class Arduino : MonoBehaviour {
             Debug.LogError("arduino.Write timed out? Have you selected the correct BaudRate?");
         }
     }
-
+  
 
 
     // ----- SERIAL COMMUNICATION ----- //
