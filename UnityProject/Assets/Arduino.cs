@@ -26,6 +26,8 @@ public class Arduino : MonoBehaviour {
 	public int RotX = 0;
 	public int RotY = 0;
 	public int RotZ = 0;
+    public float freq = 0;
+    public int flex = 0;
 
 	private float ColorR = 0;
 	private float ColorG = 0;
@@ -64,6 +66,8 @@ public class Arduino : MonoBehaviour {
         RotX = int.Parse(values[3]);              //Pass the second value to an integer
         RotY = int.Parse(values[2]);
         RotZ = int.Parse(values[1]);
+        flex = int.Parse(values[4]);
+        freq = float.Parse(values[5]);
 
 		ColorR = Mathf.Lerp (0, 1, Mathf.InverseLerp (-90, 90, RotX));
 		ColorG = Mathf.Lerp (0, 1, Mathf.InverseLerp (-90, 90, RotY));
