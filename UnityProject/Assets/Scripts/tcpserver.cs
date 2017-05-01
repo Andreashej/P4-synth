@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 using UnityEngine.UI;
+using System;
 
 public class tcpserver : MonoBehaviour {
     private static TcpClient client;
@@ -51,15 +52,20 @@ public class tcpserver : MonoBehaviour {
         string msg = "";
         if(arduino.flex > 750) {
             msg = "/selector ";
-            if(arduino.RotX < 20) {
-               msg += pulse.ToString();
-            } else if (arduino.RotX > -20) {
+            if(arduino.RotX > 15) {
+               msg += pulse;
+            } 
+            else if (arduino.RotX < -20) {
                 msg += triangle;
-            } else if (arduino.RotY < 20) {
+            } 
+            else if (arduino.RotY > 20) {
                 msg += square;
-            } else if (arduino.RotY > -20) {
+            }
+            else if (arduino.RotY < -20) {
                 msg += sawtooth;
-            } else {
+            }
+            else
+            {
                 msg += sine;
             }
             
@@ -67,27 +73,39 @@ public class tcpserver : MonoBehaviour {
             msg = "/selector 0";
         }
 
-        float frequency = Mathf.Lerp (0, 800, Mathf.InverseLerp ((float)0, (float)150, arduino.freq));;
+        float frequency = Mathf.Lerp (0, 800, Mathf.InverseLerp ((float)50, (float)200, arduino.freq));
         
-        if(frequency == (float)7.00 && count > 1) {
-            freqs[count-1] = frequency;
-            count++;
-        } else {
-            freqs[count] = frequency;
-            count++;
-        }
+        if(frequency == Mathf.Lerp (0, 800, Mathf.InverseLerp ((float)50, (float)200, (float)7.00))) {
+            if(count > 1)
+                frequency = freqs[count-1];
+            else
+                frequency = freqs[10]; 
+        } 
         
+        freqs[count] = frequency;
+        count++;
+
         if(count > freqs.Length-1) count = 0;
-        
+
+        Array.Sort(freqs);
         median = freqs[5];
+
+        Text freq = GameObject.FindWithTag("freq").GetComponent<Text>();
+        freq.text = median +" Hz";        
 
         if(msg != lastMsg) {
             PDSend(msg);
             lastMsg = msg;
         }
+        string[] waves = {"Off", "Sine", "Sawtooth", "Triangle", "Pulse","Square"};
+        Text wave = GameObject.FindWithTag("wave").GetComponent<Text>();
+        wave.text = waves[int.Parse(msg.Remove(0, "/selector ".Length))];
 
         msg = " /freq " + median;
         
+        
         PDSend(msg);
+
+        
     }
 }

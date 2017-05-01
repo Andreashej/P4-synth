@@ -122,10 +122,12 @@ void setup() {
     attachInterrupt(digitalPinToInterrupt(MEASURE_PIN), triggered, HIGH);
 
     // supply your own gyro offsets here, scaled for min sensitivity
-    mpu.setXGyroOffset(220);
-    mpu.setYGyroOffset(76);
-    mpu.setZGyroOffset(-85);
-    mpu.setZAccelOffset(1788); // 1688 factory default for my test chip
+    mpu.setXAccelOffset(-387);
+    mpu.setYAccelOffset(-2975);
+    mpu.setZAccelOffset(762);
+    mpu.setXGyroOffset(55);
+    mpu.setYGyroOffset(16);
+    mpu.setZGyroOffset(19);
 
     // make sure it worked (returns 0 if so)
     if (devStatus == 0) {

@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Arduino.cs" />
      <Compile Include="Assets\ArduinoLogger.cs" />
+     <Compile Include="Assets\Scripts\applyText.cs" />
      <Compile Include="Assets\Scripts\sendFreq.cs" />
      <Compile Include="Assets\Scripts\tcpserver.cs" />
  <Reference Include="UnityEngine.UI">
