@@ -28,7 +28,6 @@ public class tcpserver : MonoBehaviour {
         stream = client.GetStream(); //get the TCP stream
         asEn = new System.Text.ASCIIEncoding(); //Init ASCII encoded string
         PDSend("/dsp 1"); //Turn DSP on in PD
-        PDSend("/bit 4");
         Arduino.NewDataEvent += NewData;
 	}
 	
