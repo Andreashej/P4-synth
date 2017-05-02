@@ -1,0 +1,14 @@
+#N canvas 249 299 705 335 10;
+#X obj 103 97 phasor~;
+#X obj 102 145 *~ 2;
+#X obj 102 169 -~ 1;
+#X obj 102 122 expr~ $v1 > 0.5;
+#X floatatom 103 76 5 0 0 2 frequency - -;
+#X obj 103 41 inlet;
+#X obj 102 266 outlet~;
+#X connect 0 0 3 0;
+#X connect 1 0 2 0;
+#X connect 2 0 6 0;
+#X connect 3 0 1 0;
+#X connect 4 0 0 0;
+#X connect 5 0 4 0;
