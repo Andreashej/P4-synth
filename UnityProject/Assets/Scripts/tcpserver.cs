@@ -33,7 +33,7 @@ public class tcpserver : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () {   
         
 	}
 
@@ -94,7 +94,7 @@ public class tcpserver : MonoBehaviour {
         freq.text = median +" Hz";        
 
         if(msg != lastMsg) {
-            PDSend(msg);
+            PDSend("/ch1 " + msg);
             lastMsg = msg;
         }
         string[] waves = {"Off", "Sine", "Sawtooth", "Triangle", "Pulse","Square"};
@@ -104,7 +104,7 @@ public class tcpserver : MonoBehaviour {
         msg = " /freq " + median;
         
         
-        PDSend(msg);
+        PDSend("/ch1 " + msg);
 
         
     }
