@@ -1,6 +1,6 @@
 #N canvas 250 23 1031 803 10;
-#X obj -25 -103 hsl 128 15 0 800 0 0 empty \$0-freq Frequency 0 7 0
-10 -262144 -1 -1 0 1;
+#X obj -25 -103 hsl 128 15 0 1200 0 0 empty \$0-freq Frequency 0 7
+0 10 -262144 -1 -1 6216 1;
 #X obj -28 -31 s-cosine-wave;
 #X obj 0 -10 s-sawtooth-wave;
 #X obj 59 41 s-square-wave;

@@ -12,6 +12,7 @@
 #X obj 53 -43 channels;
 #X obj 123 -43 channels;
 #X obj 190 -43 channels;
+#X obj 172 31 *~ 0.1;
 #X connect 0 0 1 0;
 #X connect 0 0 6 0;
 #X connect 0 1 2 0;
@@ -24,11 +25,9 @@
 #X connect 6 5 11 0;
 #X connect 7 0 5 1;
 #X connect 7 0 5 0;
-#X connect 8 0 5 1;
-#X connect 8 0 5 0;
-#X connect 9 0 5 1;
-#X connect 9 0 5 0;
-#X connect 10 0 5 1;
-#X connect 10 0 5 0;
-#X connect 11 0 5 1;
-#X connect 11 0 5 0;
+#X connect 8 0 12 0;
+#X connect 9 0 12 0;
+#X connect 10 0 12 0;
+#X connect 11 0 12 0;
+#X connect 12 0 5 1;
+#X connect 12 0 5 0;

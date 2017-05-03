@@ -12,6 +12,7 @@ public class Backtrack : MonoBehaviour
     float nextSpawnTime;
     float speed;
     int currentNote;
+	public bool turnOFF;
 
     void Start()
     {
@@ -25,33 +26,27 @@ public class Backtrack : MonoBehaviour
 
     void Update()
     {
-        if (Time.time > nextSpawnTime)
-        {
-            if (currentNote < backtrackNotes.Length)
-            {
-                PlayStop();
-                int noteLength = backtrackNotes[currentNote].length;
-                if (backtrackNotes[currentNote].pitch == "Break")
-                {
-                    nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds + (0.64f * (noteLength - 1) / speed);
-                }
-                else
-                {
-                    if (noteLength == 1)
-                    {
-                        nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds;
-                        PlayBacktrack(currentNote);
-                    }
-                    else
-                    {
-                        nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds + (0.64f * (noteLength - 1) / speed);
-                        PlayBacktrack(currentNote);
+		if (!turnOFF) {
+			if (Time.time > nextSpawnTime) {
+				if (currentNote < backtrackNotes.Length) {
+					PlayStop ();
+					int noteLength = backtrackNotes [currentNote].length;
+					if (backtrackNotes [currentNote].pitch == "Break") {
+						nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds + (0.64f * (noteLength - 1) / speed);
+					} else {
+						if (noteLength == 1) {
+							nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds;
+							PlayBacktrack (currentNote);
+						} else {
+							nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds + (0.64f * (noteLength - 1) / speed);
+							PlayBacktrack (currentNote);
 
-                    }
-                }
-                currentNote++;
-            }
-        }
+						}
+					}
+					currentNote++;
+				}
+			}
+		}
     }
 
     public void PlayStop(){
