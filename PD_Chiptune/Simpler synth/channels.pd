@@ -1,4 +1,4 @@
-#N canvas 69 193 489 510 10;
+#N canvas 239 233 489 493 10;
 #X obj -5 127 synth;
 #X floatatom -4 68 5 0 0 0 - - -;
 #X floatatom 46 67 5 0 0 0 - - -;

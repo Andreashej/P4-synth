@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
 
     public float speed = 5f;
+    public string msg;
 
     void Start()
     {
@@ -34,10 +35,12 @@ public class Player : MonoBehaviour
             note.octave = triggerCollider.GetComponent<Note>().octave;
             float freq = RandomEnumSetter.CalculateFrequency(note.pitch, note.octave);
 
-            string msg = "/ch1" + " /freq " + freq.ToString();
-            tcpserver.PDSend(msg);
-            msg = "/ch1" + " /selector " + note.waveform.ToString();
-            tcpserver.PDSend(msg);
+            msg = "/ch1" + "+/freq-" + freq.ToString();
+            //tcpserver.PDSend(msg);
+            msg += "+/selector-" + note.waveform.ToString();
+            //tcpserver.PDSend(msg);
+
+
         }
 
         else if (triggerCollider.tag == "Long Note")
@@ -48,10 +51,10 @@ public class Player : MonoBehaviour
             note.octave = triggerCollider.GetComponent<LongNote>().octave;
             float freq = RandomEnumSetter.CalculateFrequency(note.pitch, note.octave);
 
-            string msg = "/ch1" + " /freq " + freq.ToString();
-            tcpserver.PDSend(msg);
-            msg = "/ch1" + " /selector " + note.waveform.ToString();
-            tcpserver.PDSend(msg);
+            msg = "/ch1" + "+/freq-" + freq.ToString();
+            //tcpserver.PDSend(msg);
+            msg += "+/selector-" + note.waveform.ToString();
+            //tcpserver.PDSend(msg);
         }
 
         //else if (note.pitch != "") Debug.Log(note.pitch + note.waveform + note.octave);
@@ -85,7 +88,7 @@ public class Player : MonoBehaviour
         if (triggerCollider.tag != "Head")
         {
             gameObject.GetComponent<SpriteRenderer>().color = Color.white;
-            tcpserver.PDSend("/ch1 /selector 0");
+            msg = "/ch1+/selector-0";
         }
     }
 }

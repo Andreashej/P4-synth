@@ -16,9 +16,14 @@ public class LongNote : MonoBehaviour
     public GameObject HeadPrefab;
     public GameObject MidPrefab;
     public GameObject TailPrefab;
+    float beatsPerMinute;
+    float timeBetweenSpawnsInSeconds;
 
     void Start()
     {
+        beatsPerMinute = FindObjectOfType<Spawner>().beatsPerMinute;
+        timeBetweenSpawnsInSeconds = 60f / beatsPerMinute;
+        speed = FindObjectOfType<Spawner>().spaceBetweenNotes * 0.64f / timeBetweenSpawnsInSeconds;
         length = noteLength - 2;
         screenHalfSizeInWorldUnits = new Vector2(Camera.main.aspect * Camera.main.orthographicSize, Camera.main.orthographicSize);
         GameObject newHead = Instantiate(HeadPrefab, transform.position, Quaternion.identity);

@@ -9,13 +9,18 @@ public class Note : MonoBehaviour
     public string pitch;
     public int octave;
     public float speed = 3f;
-    
+    float beatsPerMinute;
+    float timeBetweenSpawnsInSeconds;
+
     Vector2 screenHalfSizeInWorldUnits;
 
 
     // Use this for initialization
     void Start()
     {
+        beatsPerMinute = FindObjectOfType<Spawner>().beatsPerMinute;
+        timeBetweenSpawnsInSeconds = 60f / beatsPerMinute;
+        speed = FindObjectOfType<Spawner>().spaceBetweenNotes * 0.64f / timeBetweenSpawnsInSeconds;
         screenHalfSizeInWorldUnits = new Vector2(Camera.main.aspect * Camera.main.orthographicSize, Camera.main.orthographicSize);
     }
 
@@ -25,9 +30,10 @@ public class Note : MonoBehaviour
         transform.Translate(Vector2.left * speed * Time.deltaTime);
         if (transform.position.x <= -(screenHalfSizeInWorldUnits.x + 0.64f))
         {
-			if(gameObject != null){
-				Destroy(gameObject);
-			}
+            if (gameObject != null)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 

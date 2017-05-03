@@ -31,11 +31,14 @@ public class Backtrack : MonoBehaviour
     {
         if (!turnOFF)
         {
+            
             if (Time.time > nextSpawnTime)
             {
                 if (currentNote < backtrackNotes.Length)
                 {
                     int noteLength = backtrackNotes[currentNote].length;
+                    
+                    
                     if (backtrackNotes[currentNote].pitch == "Break")
                     {
                         nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds;// + (0.64f * (noteLength - 1) / speed);
@@ -44,6 +47,7 @@ public class Backtrack : MonoBehaviour
                             message = SendStop();
                             sent = true;
                         }
+                        
                     }
                     else
                     {
@@ -53,6 +57,7 @@ public class Backtrack : MonoBehaviour
                             message = SendBacktrack(currentNote);
                             sent = true;
                         }
+                        
 
                         /*if (noteLength == 1)
                         {
@@ -66,13 +71,14 @@ public class Backtrack : MonoBehaviour
 
                         }*/
                     }
+                   
                     if (whereWeAre == noteLength)
                     {
+                        
                         currentNote++;
-                        SendStop();
+                        //message = SendStop();
                         whereWeAre = 1;
                         sent = false;
-                        message = "";
                     }
                     else whereWeAre++;
 
@@ -83,13 +89,13 @@ public class Backtrack : MonoBehaviour
 
     public string SendStop()
     {
-        string msg = "/ch" + channel + " /selector 0";
+        string msg = "/selector-0";
         return msg;
     }
 
     public void PlayStop()
     {
-        string hello = "/ch" + channel + " /selector 0";
+        string hello = "/ch" + channel + "+/selector-0";
         tcpserver.PDSend(hello);
     }
 
@@ -99,7 +105,7 @@ public class Backtrack : MonoBehaviour
         int waveform = backtrackNotes[note].waveform;
         int length = backtrackNotes[note].length;
 
-        string msg = "/ch" + channel.ToString() + " /freq " + freq.ToString() + " /selector " + waveform.ToString();
+        string msg = "/freq-" + freq.ToString() + "+/selector-" + waveform.ToString();
         return msg;
     }
 
@@ -109,9 +115,9 @@ public class Backtrack : MonoBehaviour
         int waveform = backtrackNotes[note].waveform;
         int length = backtrackNotes[note].length;
 
-        string hello = "/ch" + channel.ToString() + " /freq " + freq.ToString();
+        string hello = "/ch" + channel.ToString() + "+/freq-" + freq.ToString();
         tcpserver.PDSend(hello);
-        hello = "/ch" + channel.ToString() + " /selector " + waveform.ToString();
+        hello = "/ch" + channel.ToString() + "+/selector-" + waveform.ToString();
         tcpserver.PDSend(hello);
 
 

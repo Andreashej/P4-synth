@@ -6,33 +6,36 @@ public class BacktrackHandler : MonoBehaviour
 {
 
     public Component[] backtrackChannels;
+    Player player;
     float beatsPerMinute;
     float timeBetweenSpawnsInSeconds;
     float speed;
     float nextSpawnTime;
-    string msg = "helo";
+    string msg = "";
 
     // Use this for initialization
     void Start()
     {
-        backtrackChannels = GetComponentsInChildren<Transform>();
+        backtrackChannels = GetComponentsInChildren<Backtrack>();
         beatsPerMinute = FindObjectOfType<Spawner>().beatsPerMinute;
         timeBetweenSpawnsInSeconds = 60f / beatsPerMinute;
         speed = FindObjectOfType<Spawner>().spaceBetweenNotes * 0.64f / timeBetweenSpawnsInSeconds;
+        player = FindObjectOfType<Player>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        msg += backtrackChannels[0].GetComponent<Backtrack>().message + " ";
-		msg += backtrackChannels[1].GetComponent<Backtrack>().message + " ";
-		msg += backtrackChannels[2].GetComponent<Backtrack>().message + " ";
-		msg += backtrackChannels[3].GetComponent<Backtrack>().message;
 
-        if (Time.time > nextSpawnTime)
-        {
-			nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds;
-			tcpserver.PDSend(msg);
-        }
+        msg = player.msg + " ";
+        //if (Time.time > nextSpawnTime)
+        //{
+            for(int i = 0; i < backtrackChannels.Length; i++) {
+                msg += "/ch" + backtrackChannels[i].GetComponent<Backtrack>().channel + "+" + backtrackChannels[i].GetComponent<Backtrack>().message + " ";
+            }
+            //nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds/2f;
+            tcpserver.PDSend(msg);
+            msg = "";
+        //}
     }
 }
