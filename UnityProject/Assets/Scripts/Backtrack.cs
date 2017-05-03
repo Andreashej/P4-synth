@@ -12,7 +12,10 @@ public class Backtrack : MonoBehaviour
     float nextSpawnTime;
     float speed;
     int currentNote;
-	public bool turnOFF;
+    public bool turnOFF;
+    int whereWeAre = 1;
+    bool sent = false;
+    public string message = "";
 
     void Start()
     {
@@ -26,32 +29,78 @@ public class Backtrack : MonoBehaviour
 
     void Update()
     {
-		if (!turnOFF) {
-			if (Time.time > nextSpawnTime) {
-				if (currentNote < backtrackNotes.Length) {
-					PlayStop ();
-					int noteLength = backtrackNotes [currentNote].length;
-					if (backtrackNotes [currentNote].pitch == "Break") {
-						nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds + (0.64f * (noteLength - 1) / speed);
-					} else {
-						if (noteLength == 1) {
-							nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds;
-							PlayBacktrack (currentNote);
-						} else {
-							nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds + (0.64f * (noteLength - 1) / speed);
-							PlayBacktrack (currentNote);
+        if (!turnOFF)
+        {
+            if (Time.time > nextSpawnTime)
+            {
+                if (currentNote < backtrackNotes.Length)
+                {
+                    int noteLength = backtrackNotes[currentNote].length;
+                    if (backtrackNotes[currentNote].pitch == "Break")
+                    {
+                        nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds;// + (0.64f * (noteLength - 1) / speed);
+                        if (!sent)
+                        {
+                            message = SendStop();
+                            sent = true;
+                        }
+                    }
+                    else
+                    {
+                        nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds;
+                        if (!sent)
+                        {
+                            message = SendBacktrack(currentNote);
+                            sent = true;
+                        }
 
-						}
-					}
-					currentNote++;
-				}
-			}
-		}
+                        /*if (noteLength == 1)
+                        {
+                            nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds;
+                            SendBacktrack(currentNote);
+                        }
+                        else
+                        {
+                            nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds + (0.64f * (noteLength - 1) / speed);
+                            SendBacktrack(currentNote);
+
+                        }*/
+                    }
+                    if (whereWeAre == noteLength)
+                    {
+                        currentNote++;
+                        SendStop();
+                        whereWeAre = 1;
+                        sent = false;
+                        message = "";
+                    }
+                    else whereWeAre++;
+
+                }
+            }
+        }
     }
 
-    public void PlayStop(){
+    public string SendStop()
+    {
+        string msg = "/ch" + channel + " /selector 0";
+        return msg;
+    }
+
+    public void PlayStop()
+    {
         string hello = "/ch" + channel + " /selector 0";
         tcpserver.PDSend(hello);
+    }
+
+    public string SendBacktrack(int note)
+    {
+        float freq = RandomEnumSetter.CalculateFrequency(backtrackNotes[note].pitch, backtrackNotes[note].octave);
+        int waveform = backtrackNotes[note].waveform;
+        int length = backtrackNotes[note].length;
+
+        string msg = "/ch" + channel.ToString() + " /freq " + freq.ToString() + " /selector " + waveform.ToString();
+        return msg;
     }
 
     public void PlayBacktrack(int note)
@@ -60,11 +109,11 @@ public class Backtrack : MonoBehaviour
         int waveform = backtrackNotes[note].waveform;
         int length = backtrackNotes[note].length;
 
-        string hello = "/ch" + channel.ToString() + " /freq " + freq.ToString(); 
+        string hello = "/ch" + channel.ToString() + " /freq " + freq.ToString();
         tcpserver.PDSend(hello);
         hello = "/ch" + channel.ToString() + " /selector " + waveform.ToString();
         tcpserver.PDSend(hello);
-        
+
 
         /*
 			this is where you play the channels, backtrackNotes[0-3]
