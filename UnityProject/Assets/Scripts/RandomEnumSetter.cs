@@ -47,7 +47,7 @@ public static class RandomEnumSetter
 
     public static float CalculateFrequency(string pitch, int octave)
     {
-        if(pitch == "Break") return 0;
+        if (pitch == "Break") return 0;
         float frequency = 110f * Mathf.Pow(2f, noteFreqAndPos[pitch] / 12f) * Mathf.Pow(2, octave);
         return frequency;
     }

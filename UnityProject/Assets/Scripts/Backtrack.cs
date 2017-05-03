@@ -4,29 +4,73 @@ using UnityEngine;
 
 public class Backtrack : MonoBehaviour
 {
-    public TextAsset[] backtrackChannels;
-    NoteHelper[][] backtrackNotes;
+    public TextAsset backtrackChannel;
+    NoteHelper[] backtrackNotes;
+    public int channel;
+    float beatsPerMinute;
+    float timeBetweenSpawnsInSeconds;
+    float nextSpawnTime;
+    float speed;
+    int currentNote;
 
     void Start()
-    { 
-        PlayBacktrack();
-    }
-
-    public void FillBacktrackChannels()
-    {  
-
-        backtrackNotes = new NoteHelper[backtrackChannels.Length][];
-
-        for (int i = 0; i < backtrackNotes.Length; i++)
-        {
-            backtrackNotes[i] = RandomEnumSetter.MakeSongFromText(backtrackChannels[i]);
-        }
-
-    }
-
-    public void PlayBacktrack()
     {
-        FillBacktrackChannels();
+        beatsPerMinute = FindObjectOfType<Spawner>().beatsPerMinute;
+        timeBetweenSpawnsInSeconds = 60f / beatsPerMinute;
+        speed = FindObjectOfType<Spawner>().spaceBetweenNotes * 0.64f / timeBetweenSpawnsInSeconds;
+        backtrackNotes = RandomEnumSetter.MakeSongFromText(backtrackChannel);
+        currentNote = 0;
+    }
+
+
+    void Update()
+    {
+        if (Time.time > nextSpawnTime)
+        {
+            if (currentNote < backtrackNotes.Length)
+            {
+                PlayStop();
+                int noteLength = backtrackNotes[currentNote].length;
+                if (backtrackNotes[currentNote].pitch == "Break")
+                {
+                    nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds + (0.64f * (noteLength - 1) / speed);
+                }
+                else
+                {
+                    if (noteLength == 1)
+                    {
+                        nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds;
+                        PlayBacktrack(currentNote);
+                    }
+                    else
+                    {
+                        nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds + (0.64f * (noteLength - 1) / speed);
+                        PlayBacktrack(currentNote);
+
+                    }
+                }
+                currentNote++;
+            }
+        }
+    }
+
+    public void PlayStop(){
+        string hello = "/ch" + channel + " /selector 0";
+        tcpserver.PDSend(hello);
+    }
+
+    public void PlayBacktrack(int note)
+    {
+        float freq = RandomEnumSetter.CalculateFrequency(backtrackNotes[note].pitch, backtrackNotes[note].octave);
+        int waveform = backtrackNotes[note].waveform;
+        int length = backtrackNotes[note].length;
+
+        string hello = "/ch" + channel.ToString() + " /freq " + freq.ToString(); 
+        tcpserver.PDSend(hello);
+        hello = "/ch" + channel.ToString() + " /selector " + waveform.ToString();
+        tcpserver.PDSend(hello);
+        
+
         /*
 			this is where you play the channels, backtrackNotes[0-3]
 			backtrackNotes[i][j].<name> are the i channel's j note's pitch, octave, waveform and length

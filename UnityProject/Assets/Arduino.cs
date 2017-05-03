@@ -27,10 +27,6 @@ public class Arduino : MonoBehaviour {
     public float freq = 0;
     public int flex = 0;
 
-	private float ColorR = 0;
-	private float ColorG = 0;
-	private float ColorB = 0;
-
     //Event handler
     public delegate void NewDataEventHandler(Arduino arduino);
     public static event NewDataEventHandler NewDataEvent;
@@ -66,10 +62,6 @@ public class Arduino : MonoBehaviour {
         RotZ = int.Parse(values[1]);
         flex = int.Parse(values[4]);
         freq = float.Parse(values[5]);
-
-		ColorR = Mathf.Lerp (0, 1, Mathf.InverseLerp (-90, 90, RotX));
-		ColorG = Mathf.Lerp (0, 1, Mathf.InverseLerp (-90, 90, RotY));
-		ColorB = Mathf.Lerp (0, 1, Mathf.InverseLerp (-180, 180, RotZ));
 
         //Feel free to add new variables (both here and in the Arduino script).
 

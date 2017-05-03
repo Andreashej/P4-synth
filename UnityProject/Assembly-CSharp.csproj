@@ -61,10 +61,15 @@
      <Compile Include="Assets\Scripts\sendFreq.cs" />
      <Compile Include="Assets\Scripts\tcpserver.cs" />
      <None Include="Assets\Resources\Backtrack\channel1.txt" />
+     <None Include="Assets\Resources\monkeyfixed.txt" />
      <None Include="Assets\Resources\monkey.txt" />
+     <None Include="Assets\Resources\Backtrack\channel2sin.txt" />
      <None Include="Assets\Resources\Backtrack\channel3.txt" />
      <None Include="Assets\Resources\Backtrack\channel4.txt" />
      <None Include="Assets\Resources\TestSong.txt" />
+     <None Include="Assets\Resources\Backtrack\channel4sin.txt" />
+     <None Include="Assets\Resources\Backtrack\channel1sin.txt" />
+     <None Include="Assets\Resources\Backtrack\channel3sin.txt" />
      <None Include="Assets\Resources\Backtrack\channel2.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
