@@ -21,10 +21,17 @@ MonoBehaviour:
     width: 1920
     height: 947
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_MinSize: {x: 713, y: 542}
   m_MaxSize: {x: 18008, y: 14042}
   vertical: 0
   controlID: 13445
+=======
+  m_MinSize: {x: 713, y: 471}
+  m_MaxSize: {x: 18008, y: 14021}
+  vertical: 0
+  controlID: 150
+>>>>>>> 672339ddc120940d2af15d336e56c9e86900a01a
 =======
   m_MinSize: {x: 713, y: 471}
   m_MaxSize: {x: 18008, y: 14021}
@@ -331,9 +338,12 @@ MonoBehaviour:
   m_MaxSize: {x: 14006, y: 14021}
   vertical: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
   controlID: 13411
 --- !u!114 &10
 =======
+=======
+>>>>>>> 672339ddc120940d2af15d336e56c9e86900a01a
   controlID: 151
 --- !u!114 &8
 >>>>>>> 672339ddc120940d2af15d336e56c9e86900a01a
@@ -360,9 +370,12 @@ MonoBehaviour:
   m_MaxSize: {x: 10004, y: 14021}
   vertical: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
   controlID: 13262
 --- !u!114 &11
 =======
+=======
+>>>>>>> 672339ddc120940d2af15d336e56c9e86900a01a
   controlID: 94
 --- !u!114 &9
 >>>>>>> 672339ddc120940d2af15d336e56c9e86900a01a
@@ -419,9 +432,15 @@ MonoBehaviour:
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_SelectedIDs: 52280000
     m_LastClickedID: 10322
     m_ExpandedIDs: b8f5ffffe4fbffff00000000
+=======
+    m_SelectedIDs: 
+    m_LastClickedID: 0
+    m_ExpandedIDs: 66f5ffff00000000
+>>>>>>> 672339ddc120940d2af15d336e56c9e86900a01a
 =======
     m_SelectedIDs: 
     m_LastClickedID: 0
@@ -468,10 +487,13 @@ MonoBehaviour:
     width: 485
     height: 593
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_MinSize: {x: 234, y: 271}
   m_MaxSize: {x: 10004, y: 10021}
   m_ActualView: {fileID: 14}
 =======
+=======
+>>>>>>> 672339ddc120940d2af15d336e56c9e86900a01a
   m_MinSize: {x: 230, y: 250}
   m_MaxSize: {x: 10000, y: 10000}
   m_ActualView: {fileID: 12}
@@ -518,11 +540,19 @@ MonoBehaviour:
     m_SearchArea: 0
     m_Folders:
 <<<<<<< HEAD
+<<<<<<< HEAD
     - Assets/Prefabs
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
   - Assets/Prefabs
+=======
+    - Assets/Scripts
+  m_ViewMode: 1
+  m_StartGridSize: 16
+  m_LastFolders:
+  - Assets/Scripts
+>>>>>>> 672339ddc120940d2af15d336e56c9e86900a01a
 =======
     - Assets/Scripts
   m_ViewMode: 1
@@ -536,9 +566,15 @@ MonoBehaviour:
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_SelectedIDs: a6250000
     m_LastClickedID: 9638
     m_ExpandedIDs: 00000000d42400008a250000ca280000cc280000ce280000d0280000d2280000d428000000ca9a3bffffff7f
+=======
+    m_SelectedIDs: 2e2a0000
+    m_LastClickedID: 10798
+    m_ExpandedIDs: 00000000d4290000d62b0000d82b0000da2b0000dc2b0000de2b0000e02b000000ca9a3bffffff7f
+>>>>>>> 672339ddc120940d2af15d336e56c9e86900a01a
 =======
     m_SelectedIDs: 2e2a0000
     m_LastClickedID: 10798
@@ -572,7 +608,11 @@ MonoBehaviour:
     m_SelectedIDs: 
     m_LastClickedID: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_ExpandedIDs: 00000000d42400008a250000ca280000cc280000ce280000d0280000d2280000d428000000ca9a3bffffff7f
+=======
+    m_ExpandedIDs: 00000000d4290000d62b0000d82b0000da2b0000dc2b0000de2b0000e02b0000
+>>>>>>> 672339ddc120940d2af15d336e56c9e86900a01a
 =======
     m_ExpandedIDs: 00000000d4290000d62b0000d82b0000da2b0000dc2b0000de2b0000e02b0000
 >>>>>>> 672339ddc120940d2af15d336e56c9e86900a01a
@@ -601,10 +641,13 @@ MonoBehaviour:
       m_ResourceFile: 
   m_ListAreaState:
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_SelectedInstanceIDs: 52280000
     m_LastClickedInstanceID: 10322
     m_HadKeyboardFocusLastEvent: 0
 =======
+=======
+>>>>>>> 672339ddc120940d2af15d336e56c9e86900a01a
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
@@ -660,9 +703,12 @@ MonoBehaviour:
   m_MaxSize: {x: 4002, y: 8042}
   vertical: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
   controlID: 13412
 --- !u!114 &16
 =======
+=======
+>>>>>>> 672339ddc120940d2af15d336e56c9e86900a01a
   controlID: 152
 --- !u!114 &14
 >>>>>>> 672339ddc120940d2af15d336e56c9e86900a01a
@@ -684,10 +730,13 @@ MonoBehaviour:
     width: 555
     height: 527
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_MinSize: {x: 277, y: 71}
   m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 17}
 =======
+=======
+>>>>>>> 672339ddc120940d2af15d336e56c9e86900a01a
   m_MinSize: {x: 275, y: 50}
   m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 15}
