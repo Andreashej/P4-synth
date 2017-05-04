@@ -1,17 +1,17 @@
-#N canvas 250 23 1031 803 10;
-#X obj -25 -103 hsl 128 15 0 1200 0 0 empty \$0-freq Frequency 0 7
-0 10 -262144 -1 -1 6216 1;
-#X obj -28 -31 s-cosine-wave;
-#X obj 0 -10 s-sawtooth-wave;
-#X obj 59 41 s-square-wave;
-#X obj 29 17 s-triangle-wave;
-#X obj -58 -45 vradio 15 1 0 5 empty \$0-wave Pitch 0 -8 0 10 -262144
+#N canvas 417 131 246 332 10;
+#X obj -25 -574 hsl 128 15 0 1200 0 0 empty \$0-freq Frequency 0 7
+0 10 -262144 -1 -1 0 1;
+#X obj -28 -502 s-cosine-wave;
+#X obj 0 -481 s-sawtooth-wave;
+#X obj 59 -438 s-square-wave;
+#X obj 29 -459 s-triangle-wave;
+#X obj -58 -516 vradio 15 1 0 5 empty \$0-wave Pitch 0 -8 0 10 -262144
 -1 -1 0;
-#X obj -58 72 multiplex~ . . . . .;
-#X obj -55 153 quantize~ 4;
-#X obj -59 -155 inlet;
-#X obj -15 -154 inlet;
-#X obj -55 202 outlet~;
+#X obj -58 -399 multiplex~ . . . . .;
+#X obj -57 -368 quantize~ 4;
+#X obj -58 -626 inlet wave;
+#X obj 15 -626 inlet freq;
+#X obj -57 -338 outlet~ note;
 #X connect 0 0 1 0;
 #X connect 0 0 2 0;
 #X connect 0 0 4 0;
@@ -25,4 +25,4 @@
 #X connect 7 0 10 0;
 #X connect 8 0 5 0;
 #X connect 9 0 0 0;
-#X coords 0 803 1 802 600 210 0;
+#X coords 0 332 1 331 600 210 0;

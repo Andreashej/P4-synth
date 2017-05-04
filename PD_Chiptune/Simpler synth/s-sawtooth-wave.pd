@@ -1,8 +1,8 @@
-#N canvas 210 341 275 344 10;
+#N canvas 210 341 275 321 10;
 #X floatatom 49 118 5 0 0 2 frequency - -;
 #X obj 49 141 phasor~ 0;
-#X obj 49 79 inlet;
 #X obj 49 193 outlet~;
+#X obj 49 79 inlet freq;
 #X connect 0 0 1 0;
-#X connect 1 0 3 0;
-#X connect 2 0 0 0;
+#X connect 1 0 2 0;
+#X connect 3 0 0 0;
