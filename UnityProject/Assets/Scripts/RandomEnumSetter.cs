@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-public enum Waveform { Sine, Triangle, Square, Sawtooth, Pulse };
+public enum Waveform { None, Sine, Triangle, Square, Sawtooth, Pulse };
 
 public static class RandomEnumSetter
 {
-    public static string[] colors = { "blue", "red", "orange", "green", "pink" };
+    public static string[] colors = { "white", "blue", "red", "orange", "green", "pink" };
     //public const int _A0 = 110;
     public static Dictionary<string, int> noteFreqAndPos = new Dictionary<string, int>()
     {

@@ -65,6 +65,7 @@
      <None Include="Assets\Resources\monkeyfixed.txt" />
      <None Include="Assets\Resources\monkey.txt" />
      <None Include="Assets\Resources\monkeyfixedbich.txt" />
+     <None Include="Assets\Resources\TestBG.txt" />
      <None Include="Assets\Resources\Backtrack\channel3.txt" />
      <None Include="Assets\Resources\Backtrack\channel4.txt" />
      <None Include="Assets\Resources\TestSong.txt" />

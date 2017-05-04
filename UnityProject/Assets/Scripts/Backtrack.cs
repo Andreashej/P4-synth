@@ -19,6 +19,7 @@ public class Backtrack : MonoBehaviour
 
     void Start()
     {
+        message = SendStop();
         beatsPerMinute = FindObjectOfType<Spawner>().beatsPerMinute;
         timeBetweenSpawnsInSeconds = 60f / beatsPerMinute;
         speed = FindObjectOfType<Spawner>().spaceBetweenNotes * 0.64f / timeBetweenSpawnsInSeconds;
@@ -83,6 +84,7 @@ public class Backtrack : MonoBehaviour
                     else whereWeAre++;
 
                 }
+                else message = SendStop();
             }
         }
     }
