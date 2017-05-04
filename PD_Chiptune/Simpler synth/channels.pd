@@ -1,10 +1,10 @@
 #N canvas 239 233 489 493 10;
-#X obj -5 127 synth;
-#X floatatom -4 68 5 0 0 0 - - -;
-#X floatatom 46 67 5 0 0 0 - - -;
+#X obj -6 117 synth;
+#X floatatom -30 68 5 0 0 0 - - -;
+#X floatatom 40 68 5 0 0 0 - - -;
 #X obj -30 13 OSCroute /freq /selector;
-#X obj -31 -29 inlet;
-#X obj -6 169 outlet~;
+#X obj -30 -19 inlet note-string;
+#X obj -6 149 outlet~ backtrack;
 #X connect 0 0 5 0;
 #X connect 1 0 0 1;
 #X connect 2 0 0 0;
