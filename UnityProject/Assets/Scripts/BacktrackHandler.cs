@@ -14,6 +14,7 @@ public class BacktrackHandler : MonoBehaviour
     string msg = "";
     Vector2 screenHalfSizeInWorldUnits;
     float delay;
+    public string ch1Msg;
 
     // Use this for initialization
     void Start()
@@ -28,6 +29,7 @@ public class BacktrackHandler : MonoBehaviour
         delay = 0;
         Debug.Log(distance);
         Debug.Log(delay);
+        ch1Msg = "";
     }
 
     // Update is called once per frame
@@ -35,7 +37,7 @@ public class BacktrackHandler : MonoBehaviour
     {
         if (Time.time > delay)
         {
-            msg = player.msg + " ";
+            msg = ch1Msg + " ";
             //if (Time.time > nextSpawnTime)
             //{
             for (int i = 0; i < backtrackChannels.Length; i++)

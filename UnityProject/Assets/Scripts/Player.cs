@@ -7,18 +7,35 @@ public class Player : MonoBehaviour
 
     public float speed = 5f;
     public string msg;
+    Vector2 screenHalfSizeInWorldUnits;
+    float freq;
+    float y;
+    float highestNoteValue;
+    float lowestNoteValue;
 
     void Start()
     {
-
+        screenHalfSizeInWorldUnits = new Vector2(Camera.main.aspect * Camera.main.orthographicSize, Camera.main.orthographicSize);
+        int lowestNotePosition = RandomEnumSetter.GMajorPos["G"];
+        int lowestOctaveOffset = (1 - 1) * 8;
+        int highestNotePosition = RandomEnumSetter.GMajorPos["C"];
+        int highestOctaveOffset = (3 - 1) * 8;
+        float spawnBoundary = FindObjectOfType<Spawner>().spawnBoundary;
+        int lanes = FindObjectOfType<Spawner>().lanes;
+        
+        highestNoteValue = -screenHalfSizeInWorldUnits.y + spawnBoundary + (highestNotePosition + highestOctaveOffset) * 2 * (screenHalfSizeInWorldUnits.y - spawnBoundary) / (lanes - 1);
+        lowestNoteValue = -screenHalfSizeInWorldUnits.y + spawnBoundary + (lowestNotePosition + lowestOctaveOffset) * 2 * (screenHalfSizeInWorldUnits.y - spawnBoundary) / (lanes - 1);
     }
 
     // Update is called once per frame
     void Update()
     {
-        float inputY = Input.GetAxisRaw("Vertical");
-        float velocity = inputY * speed;
-        transform.Translate(Vector2.up * velocity * Time.deltaTime);
+        //float inputY = Input.GetAxisRaw("Vertical");
+        //float velocity = inputY * speed;
+        //transform.Translate(Vector2.up * velocity * Time.deltaTime);
+        freq = FindObjectOfType<tcpserver>().GetMedian();
+        y = Mathf.Lerp (lowestNoteValue, highestNoteValue, Mathf.InverseLerp (RandomEnumSetter.CalculateGMajorPosition("G", 1), RandomEnumSetter.CalculateGMajorPosition("C", 3), freq));
+        transform.position = new Vector3(transform.position.x, y, transform.position.z);
     }
 
     void OnTriggerEnter2D(Collider2D triggerCollider) //This one is used for scoring

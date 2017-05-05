@@ -59,7 +59,6 @@
      <Compile Include="Assets\Scripts\Spawner.cs" />
      <Compile Include="Assets\Scripts\Tail.cs" />
      <Compile Include="Assets\Scripts\applyText.cs" />
-     <Compile Include="Assets\Scripts\sendFreq.cs" />
      <Compile Include="Assets\Scripts\tcpserver.cs" />
      <None Include="Assets\Resources\Backtrack\channel1.txt" />
      <None Include="Assets\Resources\monkeyfixed.txt" />
