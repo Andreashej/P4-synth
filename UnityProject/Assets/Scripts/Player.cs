@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         screenHalfSizeInWorldUnits = new Vector2(Camera.main.aspect * Camera.main.orthographicSize, Camera.main.orthographicSize);
-        int lowestNotePosition = RandomEnumSetter.GMajorPos["G"];
+        int lowestNotePosition = RandomEnumSetter.GMajorPos["F#"];
         int lowestOctaveOffset = (1 - 1) * 8;
         int highestNotePosition = RandomEnumSetter.GMajorPos["C"];
         int highestOctaveOffset = (3 - 1) * 8;
@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
         //float velocity = inputY * speed;
         //transform.Translate(Vector2.up * velocity * Time.deltaTime);
         freq = FindObjectOfType<tcpserver>().GetMedian();
-        y = Mathf.Lerp (lowestNoteValue, highestNoteValue, Mathf.InverseLerp (RandomEnumSetter.CalculateGMajorPosition("G", 1), RandomEnumSetter.CalculateGMajorPosition("C", 3), freq));
+        y = Mathf.Lerp (lowestNoteValue, highestNoteValue, Mathf.InverseLerp (RandomEnumSetter.CalculateGMajorPosition("F#", 1), RandomEnumSetter.CalculateGMajorPosition("C", 3), freq));
         transform.position = new Vector3(transform.position.x, y, transform.position.z);
     }
 

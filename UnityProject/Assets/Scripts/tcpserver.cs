@@ -65,7 +65,6 @@ public class tcpserver : MonoBehaviour
     {
         string selectorMsg = "+/selector-";
 
-        Debug.Log(arduino.flex);
         if (arduino.flex > 720)
         {
             if (arduino.RotX > 15)
@@ -112,10 +111,13 @@ public class tcpserver : MonoBehaviour
 
         if (count > freqs.Length - 1) count = 0;
 
-        Array.Sort(freqs);
-        median = freqs[5];
+        float[] freqsort = new float[11];
+        freqs.CopyTo(freqsort, 0);
+        Array.Sort(freqsort);
+        median = freqsort[5];
 
-        float freqMedian = Mathf.Lerp(RandomEnumSetter.CalculateFrequency("G", 1), RandomEnumSetter.CalculateFrequency("C", 3), Mathf.InverseLerp(Low, High, median));
+        float freqMedian = Mathf.Lerp(RandomEnumSetter.CalculateFrequency("F#", 1), RandomEnumSetter.CalculateFrequency("C", 3), Mathf.InverseLerp(Low, High, median));
+        Debug.Log("Median: " + median + " Freq: " + freqMedian);
         /*
         Text freq = GameObject.FindWithTag("freq").GetComponent<Text>();
         freq.text = median + " Hz";
@@ -142,6 +144,6 @@ public class tcpserver : MonoBehaviour
 
     public float GetMedian()
     {
-        return Mathf.Lerp(RandomEnumSetter.CalculateGMajorPosition("G", 1), RandomEnumSetter.CalculateGMajorPosition("C", 3), Mathf.InverseLerp(Low, High, median));
+        return Mathf.Lerp(RandomEnumSetter.CalculateGMajorPosition("F#", 1), RandomEnumSetter.CalculateGMajorPosition("C", 3), Mathf.InverseLerp(Low, High, median));
     }
 }
