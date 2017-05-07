@@ -81,7 +81,7 @@ public class Spawner : MonoBehaviour
                             int octaveOffset = (songArray[currentNote].octave - 1) * 8;
 
                             Vector2 spawnPosition = new Vector2(screenHalfSizeInWorldUnits.x + 0.64f, -screenHalfSizeInWorldUnits.y + spawnBoundary + (notePosition + octaveOffset) * 2 * (screenHalfSizeInWorldUnits.y - spawnBoundary) / (lanes - 1));
-                            Debug.Log(RandomEnumSetter.noteFreqAndPos[songArray[currentNote].pitch]);
+                            //Debug.Log(RandomEnumSetter.noteFreqAndPos[songArray[currentNote].pitch]);
                             if (noteLength == 1)
                             {
                                 nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds;
@@ -91,7 +91,7 @@ public class Spawner : MonoBehaviour
                                 newNote.GetComponent<Note>().octave = songArray[currentNote].octave;
                                 newNote.GetComponent<Note>().wave = (Waveform)songArray[currentNote].waveform;
                                 newNote.GetComponent<Note>().SetColor((Waveform)songArray[currentNote].waveform);
-                                Debug.Log(songArray[currentNote].pitch);
+                                //Debug.Log(songArray[currentNote].pitch);
                             }
                             else
                             {
@@ -102,7 +102,7 @@ public class Spawner : MonoBehaviour
                                 newLongNote.GetComponent<LongNote>().pitch = songArray[currentNote].pitch;
                                 newLongNote.GetComponent<LongNote>().octave = songArray[currentNote].octave;
                                 newLongNote.GetComponent<LongNote>().wave = (Waveform)songArray[currentNote].waveform;
-                                Debug.Log(songArray[currentNote].pitch);
+                               // Debug.Log(songArray[currentNote].pitch);
                             }
                         }
                         currentNote++;

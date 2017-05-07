@@ -37,6 +37,17 @@ public static class RandomEnumSetter
         {"G", 6},
     };
 
+     public static Dictionary<int, string> GMajorPosInv = new Dictionary<int, string>()
+    {
+        {0, "A"},
+        {1, "B"},
+        {2, "C"},
+        {3, "D"},
+        {4, "E"},
+        {5, "F#"},
+        {6, "G"},
+    };
+
         public static Dictionary<string, int[]> GMajorPosAndFreq = new Dictionary<string, int[]>()
     {
         {"A", new int[] {0, 0}},
@@ -96,4 +107,5 @@ public static class RandomEnumSetter
         }
         return songAsNotes;
     }
+
 }

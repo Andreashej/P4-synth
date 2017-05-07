@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
     float y;
     float highestNoteValue;
     float lowestNoteValue;
+    float spawnBoundary;
+    int lanes;
 
     void Start()
     {
@@ -20,8 +22,8 @@ public class Player : MonoBehaviour
         int lowestOctaveOffset = (1 - 1) * 8;
         int highestNotePosition = RandomEnumSetter.GMajorPos["C"];
         int highestOctaveOffset = (3 - 1) * 8;
-        float spawnBoundary = FindObjectOfType<Spawner>().spawnBoundary;
-        int lanes = FindObjectOfType<Spawner>().lanes;
+        spawnBoundary = FindObjectOfType<Spawner>().spawnBoundary;
+        lanes = FindObjectOfType<Spawner>().lanes;
         
         highestNoteValue = -screenHalfSizeInWorldUnits.y + spawnBoundary + (highestNotePosition + highestOctaveOffset) * 2 * (screenHalfSizeInWorldUnits.y - spawnBoundary) / (lanes - 1);
         lowestNoteValue = -screenHalfSizeInWorldUnits.y + spawnBoundary + (lowestNotePosition + lowestOctaveOffset) * 2 * (screenHalfSizeInWorldUnits.y - spawnBoundary) / (lanes - 1);
@@ -33,8 +35,16 @@ public class Player : MonoBehaviour
         //float inputY = Input.GetAxisRaw("Vertical");
         //float velocity = inputY * speed;
         //transform.Translate(Vector2.up * velocity * Time.deltaTime);
-        freq = FindObjectOfType<tcpserver>().GetMedian();
-        y = Mathf.Lerp (lowestNoteValue, highestNoteValue, Mathf.InverseLerp (RandomEnumSetter.CalculateGMajorPosition("F#", 1), RandomEnumSetter.CalculateGMajorPosition("C", 3), freq));
+        float[] medians = FindObjectOfType<tcpserver>().GetMedian();
+        
+
+        if(FindObjectOfType<tcpserver>().discrete) {
+            int NotePosition = RandomEnumSetter.GMajorPos[FindObjectOfType<tcpserver>().pitch];
+            int OctaveOffset = ((int)medians[0] - 1) * 8;
+            y = -screenHalfSizeInWorldUnits.y + spawnBoundary + (NotePosition + OctaveOffset) * 2 * (screenHalfSizeInWorldUnits.y - spawnBoundary) / (lanes - 1);
+        }else{
+            y = Mathf.Lerp (lowestNoteValue, highestNoteValue, Mathf.InverseLerp (medians[1], medians[2], medians[0]));
+        }
         transform.position = new Vector3(transform.position.x, y, transform.position.z);
     }
 
@@ -46,7 +56,7 @@ public class Player : MonoBehaviour
         note.waveform = 0;
         if (triggerCollider.tag == "Single Note")
         {
-            Debug.Log("Collided with " + triggerCollider.tag);
+            //Debug.Log("Collided with " + triggerCollider.tag);
             note.pitch = triggerCollider.GetComponent<Note>().pitch;
             note.waveform = (int)triggerCollider.GetComponent<Note>().wave;
             note.octave = triggerCollider.GetComponent<Note>().octave;
@@ -54,6 +64,7 @@ public class Player : MonoBehaviour
 
             msg = "/ch1" + "+/freq-" + freq.ToString();
             //tcpserver.PDSend(msg);
+            Debug.Log("Actual freq: " + freq + "Freq played: " + FindObjectOfType<tcpserver>().freqMedian);
             msg += "+/selector-" + note.waveform.ToString();
             //tcpserver.PDSend(msg);
 
@@ -62,12 +73,12 @@ public class Player : MonoBehaviour
 
         else if (triggerCollider.tag == "Long Note")
         {
-            Debug.Log("Collided with " + triggerCollider.tag);
+            //Debug.Log("Collided with " + triggerCollider.tag);
             note.pitch = triggerCollider.GetComponent<LongNote>().pitch;
             note.waveform = (int)triggerCollider.GetComponent<LongNote>().wave;
             note.octave = triggerCollider.GetComponent<LongNote>().octave;
             float freq = RandomEnumSetter.CalculateFrequency(note.pitch, note.octave);
-
+            Debug.Log("Actual freq: " + freq + "Freq played: " + FindObjectOfType<tcpserver>().freqMedian);
             msg = "/ch1" + "+/freq-" + freq.ToString();
             //tcpserver.PDSend(msg);
             msg += "+/selector-" + note.waveform.ToString();

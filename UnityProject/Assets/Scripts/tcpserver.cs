@@ -28,7 +28,21 @@ public class tcpserver : MonoBehaviour
     public string msg; 
 
     public float Low = 50;
-    public float High = 100;
+    public float Delta = 50;
+
+    public float freqMedian;
+    public float fromNote = RandomEnumSetter.CalculateGMajorPosition("F#", 1);
+    public float toNote = RandomEnumSetter.CalculateGMajorPosition("C", 3);
+
+    int flex;
+    float freq;
+    int RotY;
+    int RotX;
+
+    public string pitch;
+    public int octave;
+
+    public bool discrete = true;
 
 
     // Use this for initialization
@@ -45,41 +59,23 @@ public class tcpserver : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-    }
-
-    public static void PDSend(string msg)
-    {
-        string message = msg + ";"; //Store message and add ; to end of line
-        byte[] byteMsg = asEn.GetBytes(message); //Convert the message to a byte array to send
-        stream.Write(byteMsg, 0, byteMsg.Length); //Write the byte array to the stream
-    }
-
-    private void OnApplicationQuit()
-    {
-        PDSend("/dsp 0"); //Turn DSP off at application quit
-        client.Close(); //Close TCP client when application quit
-    }
-
-    void NewData(Arduino arduino)
-    {
         string selectorMsg = "+/selector-";
 
-        if (arduino.flex > 720)
+        if (flex > 720)
         {
-            if (arduino.RotX > 15)
+            if (RotX > 15)
             {
                 selector = pulse;
             }
-            else if (arduino.RotX < -20)
+            else if (RotX < -20)
             {
                 selector = triangle;
             }
-            else if (arduino.RotY > 20)
+            else if (RotY > 20)
             {
                 selector = square;
             }
-            else if (arduino.RotY < -20)
+            else if (RotY < -20)
             {
                 selector = sawtooth;
             }
@@ -96,7 +92,7 @@ public class tcpserver : MonoBehaviour
             selectorMsg += selector;
         }
 
-        float frequency = arduino.freq;
+        float frequency = freq;
 
         if (frequency == 7f)
         {
@@ -116,16 +112,21 @@ public class tcpserver : MonoBehaviour
         Array.Sort(freqsort);
         median = freqsort[5];
 
-        float freqMedian = Mathf.Lerp(RandomEnumSetter.CalculateFrequency("F#", 1), RandomEnumSetter.CalculateFrequency("C", 3), Mathf.InverseLerp(Low, High, median));
-        Debug.Log("Median: " + median + " Freq: " + freqMedian);
-        /*
-        Text freq = GameObject.FindWithTag("freq").GetComponent<Text>();
-        freq.text = median + " Hz";
+        int lanes = FindObjectOfType<Spawner>().lanes;
+        
+        int currLane =  (int)Math.Round(Mathf.Lerp(12, lanes - 1, Mathf.InverseLerp(Low, Low + Delta, median)));
 
-        string[] waves = { "Off", "Sine", "Sawtooth", "Triangle", "Pulse", "Square" };
-        Text wave = GameObject.FindWithTag("wave").GetComponent<Text>();
-        wave.text = waves[int.Parse(msg.Remove(0, "/selector ".Length))];
-        */
+        octave  = currLane / 7;
+
+        if(currLane < 7) { 
+            pitch = RandomEnumSetter.GMajorPosInv[currLane];
+        }
+        else {
+            pitch = RandomEnumSetter.GMajorPosInv[currLane - 7 * octave];
+        }
+
+        freqMedian = RandomEnumSetter.CalculateFrequency(pitch, octave);
+
         freqMsg += "+/freq-" + freqMedian;
 
         msg = "/ch1" + freqMsg + selectorMsg;
@@ -138,12 +139,34 @@ public class tcpserver : MonoBehaviour
 
         freqMsg = "";
         selectorMsg = "";
-
-
     }
 
-    public float GetMedian()
+    public static void PDSend(string msg)
     {
-        return Mathf.Lerp(RandomEnumSetter.CalculateGMajorPosition("F#", 1), RandomEnumSetter.CalculateGMajorPosition("C", 3), Mathf.InverseLerp(Low, High, median));
+        string message = msg + ";"; //Store message and add ; to end of line
+        byte[] byteMsg = asEn.GetBytes(message); //Convert the message to a byte array to send
+        stream.Write(byteMsg, 0, byteMsg.Length); //Write the byte array to the stream
+    }
+
+    private void OnApplicationQuit()
+    {
+        PDSend("/dsp 0"); //Turn DSP off at application quit
+        client.Close(); //Close TCP client when application quit
+    }
+
+    void NewData(Arduino arduino)
+    {
+        flex = arduino.flex;
+        freq = arduino.freq;
+        RotX = arduino.RotX;
+        RotY = arduino.RotY;
+    }
+
+    public float[] GetMedian()
+    {
+        if (discrete)
+            return new float[] {octave};
+        else
+            return new float[] {Mathf.Lerp(fromNote, toNote, Mathf.InverseLerp(Low, Low + Delta, median)), fromNote, toNote};
     }
 }
