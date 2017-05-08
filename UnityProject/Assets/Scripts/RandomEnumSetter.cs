@@ -48,18 +48,6 @@ public static class RandomEnumSetter
         {6, "G"},
     };
 
-        public static Dictionary<string, int[]> GMajorPosAndFreq = new Dictionary<string, int[]>()
-    {
-        {"A", new int[] {0, 0}},
-        {"B", new int[] {1, 2}},
-        {"C", new int[] {2, 3}},
-        {"D", new int[] {3, 5}},
-        {"E", new int[] {4, 7}},
-        {"F#", new int[] {5, 9}},
-        {"G", new int[] {6, 10}},
-    };
-
-
     public static Waveform GetRandomWaveform()
     {
         Array values = Enum.GetValues(typeof(Waveform));

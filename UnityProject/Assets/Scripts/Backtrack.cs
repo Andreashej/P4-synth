@@ -16,13 +16,14 @@ public class Backtrack : MonoBehaviour
     int whereWeAre = 1;
     bool sent = false;
     public string message = "";
-
+    public bool gameOn;
     void Start()
     {
         message = SendStop();
         beatsPerMinute = FindObjectOfType<Spawner>().beatsPerMinute;
         timeBetweenSpawnsInSeconds = 60f / beatsPerMinute;
         speed = FindObjectOfType<Spawner>().spaceBetweenNotes * 0.64f / timeBetweenSpawnsInSeconds;
+        gameOn = FindObjectOfType<Spawner>().gameOn;
         backtrackNotes = RandomEnumSetter.MakeSongFromText(backtrackChannel);
         currentNote = 0;
     }
@@ -30,61 +31,65 @@ public class Backtrack : MonoBehaviour
 
     void Update()
     {
-        if (!turnOFF)
+        gameOn = FindObjectOfType<Spawner>().gameOn;
+        if (gameOn)
         {
-            
-            if (Time.time > nextSpawnTime)
+            if (!turnOFF)
             {
-                if (currentNote < backtrackNotes.Length)
-                {
-                    int noteLength = backtrackNotes[currentNote].length;
-                    
-                    
-                    if (backtrackNotes[currentNote].pitch == "Break")
-                    {
-                        nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds;// + (0.64f * (noteLength - 1) / speed);
-                        if (!sent)
-                        {
-                            message = SendStop();
-                            sent = true;
-                        }
-                        
-                    }
-                    else
-                    {
-                        nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds;
-                        if (!sent)
-                        {
-                            message = SendBacktrack(currentNote);
-                            sent = true;
-                        }
-                        
 
-                        /*if (noteLength == 1)
+                if (Time.time > nextSpawnTime)
+                {
+                    if (currentNote < backtrackNotes.Length)
+                    {
+                        int noteLength = backtrackNotes[currentNote].length;
+
+
+                        if (backtrackNotes[currentNote].pitch == "Break")
                         {
-                            nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds;
-                            SendBacktrack(currentNote);
+                            nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds;// + (0.64f * (noteLength - 1) / speed);
+                            if (!sent)
+                            {
+                                message = SendStop();
+                                sent = true;
+                            }
+
                         }
                         else
                         {
-                            nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds + (0.64f * (noteLength - 1) / speed);
-                            SendBacktrack(currentNote);
+                            nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds;
+                            if (!sent)
+                            {
+                                message = SendBacktrack(currentNote);
+                                sent = true;
+                            }
 
-                        }*/
-                    }
-                   
-                    if (whereWeAre == noteLength)
-                    {
-                        
-                        currentNote++;
-                        //message = SendStop();
-                        whereWeAre = 1;
-                        sent = false;
-                    }
-                    else whereWeAre++;
 
+                            /*if (noteLength == 1)
+                            {
+                                nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds;
+                                SendBacktrack(currentNote);
+                            }
+                            else
+                            {
+                                nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds + (0.64f * (noteLength - 1) / speed);
+                                SendBacktrack(currentNote);
+
+                            }*/
+                        }
+
+                        if (whereWeAre == noteLength)
+                        {
+
+                            currentNote++;
+                            //message = SendStop();
+                            whereWeAre = 1;
+                            sent = false;
+                        }
+                        else whereWeAre++;
+
+                    }
+                    else message = SendStop();
                 }
-                else message = SendStop();
             }
         }
     }

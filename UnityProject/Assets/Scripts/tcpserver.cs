@@ -21,7 +21,7 @@ public class tcpserver : MonoBehaviour
     private float median;
     int count = 0;
     string lastMsg;
-    int selector = 0;
+    public int selector = 0;
     int lastSelector = 0;
     string selectorMsg;
     string freqMsg;
@@ -41,7 +41,6 @@ public class tcpserver : MonoBehaviour
 
     public string pitch;
     public int octave;
-
     public bool discrete = true;
 
 
