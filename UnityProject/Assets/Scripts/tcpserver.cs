@@ -21,11 +21,11 @@ public class tcpserver : MonoBehaviour
     private float median;
     int count = 0;
     string lastMsg;
-    int selector = 0;
+    public int selector = 0;
     int lastSelector = 0;
     string selectorMsg;
     string freqMsg;
-    public string msg; 
+    public string msg;
 
     public float Low = 50;
     public float Delta = 50;
@@ -41,13 +41,15 @@ public class tcpserver : MonoBehaviour
 
     public string pitch;
     public int octave;
-
-    public bool discrete = true;
+    public Toggle discreteToggle;
+    public bool discrete;
 
 
     // Use this for initialization
     void Start()
     {
+        discrete = false;
+        discreteToggle.onValueChanged.AddListener((value) => ChangeDiscrete(value));
         client = new TcpClient(); //Create new instance of TCP Client
         client.Connect("localhost", 17435); //Connect TCP client to port 17435
         stream = client.GetStream(); //get the TCP stream
@@ -113,15 +115,17 @@ public class tcpserver : MonoBehaviour
         median = freqsort[5];
 
         int lanes = FindObjectOfType<Spawner>().lanes;
-        
-        int currLane =  (int)Math.Round(Mathf.Lerp(12, lanes - 1, Mathf.InverseLerp(Low, Low + Delta, median)));
 
-        octave  = currLane / 7;
+        int currLane = (int)Math.Round(Mathf.Lerp(12, lanes - 1, Mathf.InverseLerp(Low, Low + Delta, median)));
 
-        if(currLane < 7) { 
+        octave = currLane / 7;
+
+        if (currLane < 7)
+        {
             pitch = RandomEnumSetter.GMajorPosInv[currLane];
         }
-        else {
+        else
+        {
             pitch = RandomEnumSetter.GMajorPosInv[currLane - 7 * octave];
         }
 
@@ -141,6 +145,10 @@ public class tcpserver : MonoBehaviour
         selectorMsg = "";
     }
 
+    void ChangeDiscrete(bool value)
+    {
+        discrete = value;
+    }
     public static void PDSend(string msg)
     {
         string message = msg + ";"; //Store message and add ; to end of line
@@ -165,8 +173,8 @@ public class tcpserver : MonoBehaviour
     public float[] GetMedian()
     {
         if (discrete)
-            return new float[] {octave};
+            return new float[] { octave };
         else
-            return new float[] {Mathf.Lerp(fromNote, toNote, Mathf.InverseLerp(Low, Low + Delta, median)), fromNote, toNote};
+            return new float[] { Mathf.Lerp(fromNote, toNote, Mathf.InverseLerp(Low, Low + Delta, median)), fromNote, toNote };
     }
 }

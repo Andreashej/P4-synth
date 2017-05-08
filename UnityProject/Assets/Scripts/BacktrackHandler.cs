@@ -15,6 +15,7 @@ public class BacktrackHandler : MonoBehaviour
     Vector2 screenHalfSizeInWorldUnits;
     float delay;
     public string ch1Msg;
+    bool gameOn;
 
     // Use this for initialization
     void Start()
@@ -22,6 +23,7 @@ public class BacktrackHandler : MonoBehaviour
         backtrackChannels = GetComponentsInChildren<Backtrack>();
         beatsPerMinute = FindObjectOfType<Spawner>().beatsPerMinute;
         speed = FindObjectOfType<Spawner>().spaceBetweenNotes * 0.64f / timeBetweenSpawnsInSeconds;
+        gameOn = FindObjectOfType<Spawner>().gameOn;
         player = FindObjectOfType<Player>();
         timeBetweenSpawnsInSeconds = 60f / beatsPerMinute + 0.64f / speed;
         screenHalfSizeInWorldUnits = new Vector2(Camera.main.aspect * Camera.main.orthographicSize, Camera.main.orthographicSize);
@@ -29,25 +31,31 @@ public class BacktrackHandler : MonoBehaviour
         delay = 0;
         Debug.Log(distance);
         Debug.Log(delay);
+        tcpserver.PDSend("/ch1+/selector-0 /ch2+/selector-0 /ch3+/selector-0 /ch4+/selector-0 /ch5+/selector-0"); //so the game doesn't play music in the beginning
         ch1Msg = "";
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.time > delay)
+        gameOn = FindObjectOfType<Spawner>().gameOn;
+        if (gameOn)
         {
-            msg = ch1Msg + " ";
-            //if (Time.time > nextSpawnTime)
-            //{
-            for (int i = 0; i < backtrackChannels.Length; i++)
+            if (Time.time > delay)
             {
-                msg += "/ch" + backtrackChannels[i].GetComponent<Backtrack>().channel + "+" + backtrackChannels[i].GetComponent<Backtrack>().message + " ";
+                SendMessage();
             }
-            //nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds/2f;
-            tcpserver.PDSend(msg);
-            msg = "";
-            //}
         }
+    }
+
+    void SendMessage()
+    {
+        msg = ch1Msg + " ";
+        for (int i = 0; i < backtrackChannels.Length; i++)
+        {
+            msg += "/ch" + backtrackChannels[i].GetComponent<Backtrack>().channel + "+" + backtrackChannels[i].GetComponent<Backtrack>().message + " ";
+        }
+        tcpserver.PDSend(msg);
+        msg = "";
     }
 }
