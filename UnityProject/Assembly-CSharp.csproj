@@ -70,6 +70,7 @@
      <None Include="Assets\Resources\Backtrack\channel4.txt" />
      <None Include="Assets\Resources\TestSong.txt" />
      <None Include="Assets\Resources\Backtrack\channel2.txt" />
+     <None Include="Assets\Resources\Backtrack\Channel1_sine.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

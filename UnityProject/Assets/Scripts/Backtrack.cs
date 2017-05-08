@@ -7,7 +7,7 @@ public class Backtrack : MonoBehaviour
     public TextAsset backtrackChannel;
     NoteHelper[] backtrackNotes;
     public int channel;
-    float beatsPerMinute;
+    public float beatsPerMinute = 60;
     float timeBetweenSpawnsInSeconds;
     float nextSpawnTime;
     float speed;
@@ -17,78 +17,88 @@ public class Backtrack : MonoBehaviour
     bool sent = false;
     public string message = "";
     public bool gameOn;
+    float delay;
+    Vector2 screenHalfSizeInWorldUnits;
+    public int spaceBetweenNotes = 1;
+    int lastWaveForm;
     void Start()
     {
         message = SendStop();
-        beatsPerMinute = FindObjectOfType<Spawner>().beatsPerMinute;
-        timeBetweenSpawnsInSeconds = 60f / beatsPerMinute;
-        speed = FindObjectOfType<Spawner>().spaceBetweenNotes * 0.64f / timeBetweenSpawnsInSeconds;
         gameOn = FindObjectOfType<Spawner>().gameOn;
         backtrackNotes = RandomEnumSetter.MakeSongFromText(backtrackChannel);
         currentNote = 0;
+        speed = FindObjectOfType<Spawner>().speed;
+        delay = FindObjectOfType<Spawner>().delay;
     }
 
 
     void Update()
     {
         gameOn = FindObjectOfType<Spawner>().gameOn;
+        Debug.Log(channel + " " + speed);
         if (gameOn)
         {
             if (!turnOFF)
             {
-
-                if (Time.time > nextSpawnTime)
+                if ( true )
                 {
-                    if (currentNote < backtrackNotes.Length)
+                    if (Time.time > nextSpawnTime)
                     {
-                        int noteLength = backtrackNotes[currentNote].length;
-
-
-                        if (backtrackNotes[currentNote].pitch == "Break")
+                        if (currentNote < backtrackNotes.Length)
                         {
-                            nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds;// + (0.64f * (noteLength - 1) / speed);
-                            if (!sent)
-                            {
-                                message = SendStop();
-                                sent = true;
-                            }
-
-                        }
-                        else
-                        {
-                            nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds;
-                            if (!sent)
-                            {
-                                message = SendBacktrack(currentNote);
-                                sent = true;
-                            }
+                            int noteLength = backtrackNotes[currentNote].length;
 
 
-                            /*if (noteLength == 1)
+                            if (backtrackNotes[currentNote].pitch == "Break")
                             {
-                                nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds;
-                                SendBacktrack(currentNote);
+                                
+                                if (!sent)
+                                {
+                                    nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds + (0.64f * noteLength/ speed);
+                                    message = SendStop();
+                                    sent = true;
+                                }
+                                Debug.Log(channel + " " + whereWeAre);
+
                             }
                             else
                             {
-                                nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds + (0.64f * (noteLength - 1) / speed);
-                                SendBacktrack(currentNote);
+                                
+                                if (!sent)
+                                {
+                                    nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds + (0.64f * noteLength / speed);
+                                    message = SendBacktrack(currentNote);
+                                    sent = true;
+                                }
+                                Debug.Log(channel + " " + whereWeAre);
 
-                            }*/
+
+                                /*if (noteLength == 1)
+                                {
+                                    nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds;
+                                    SendBacktrack(currentNote);
+                                }
+                                else
+                                {
+                                    nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds + (0.64f * (noteLength - 1) / speed);
+                                    SendBacktrack(currentNote);
+
+                                }*/
+                            }
+
+                            if (whereWeAre == noteLength)
+                            {
+
+                                currentNote++;
+                                //message = SendStop();
+                                whereWeAre = 1;
+                                sent = false;
+                            }
+                            else whereWeAre++;
+
                         }
-
-                        if (whereWeAre == noteLength)
-                        {
-
-                            currentNote++;
-                            //message = SendStop();
-                            whereWeAre = 1;
-                            sent = false;
-                        }
-                        else whereWeAre++;
-
+                        else message = SendStop();
                     }
-                    else message = SendStop();
                 }
             }
         }
@@ -111,8 +121,9 @@ public class Backtrack : MonoBehaviour
         float freq = RandomEnumSetter.CalculateFrequency(backtrackNotes[note].pitch, backtrackNotes[note].octave);
         int waveform = backtrackNotes[note].waveform;
         int length = backtrackNotes[note].length;
-
-        string msg = "/freq-" + freq.ToString() + "+/selector-" + waveform.ToString();
+        string msg;
+        if (waveform != lastWaveForm) msg = "/freq-" + freq.ToString() + "+/selector-" + waveform.ToString();
+        else msg = "/freq-" + freq.ToString();
         return msg;
     }
 

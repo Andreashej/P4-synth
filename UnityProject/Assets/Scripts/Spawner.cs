@@ -19,7 +19,7 @@ public class Spawner : MonoBehaviour
 
     [Range(1, 16)]
     public int spaceBetweenNotes = 1;
-    float speed;
+    public float speed;
     public int lanes = 5;
     public float spawnBoundary = 0.32f;
     Vector2 screenHalfSizeInWorldUnits;
@@ -28,8 +28,9 @@ public class Spawner : MonoBehaviour
     float nextSpawnTime;
     NoteHelper[] songArray;
     int currentNote;
-    float delay;
+    public float delay;
     public bool gameOn = false;
+    public float currTime;
 
     // Use this for initialization
     void Start()
@@ -47,9 +48,10 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("1 " + speed);
         if (gameOn)
         {
-            if (Time.time > delay)
+            if (Time.time > delay + currTime)
             {
                 if (Time.time > nextSpawnTime)
                 {
@@ -126,6 +128,7 @@ void StartGame()
 {
     gameOn = true;
     menuCanvas.SetActive(false);
+    currTime = Time.time;
 }
 
 }

@@ -29,8 +29,6 @@ public class BacktrackHandler : MonoBehaviour
         screenHalfSizeInWorldUnits = new Vector2(Camera.main.aspect * Camera.main.orthographicSize, Camera.main.orthographicSize);
         float distance = screenHalfSizeInWorldUnits.x + 0.32f - player.transform.position.x;
         delay = 0;
-        Debug.Log(distance);
-        Debug.Log(delay);
         tcpserver.PDSend("/ch1+/selector-0 /ch2+/selector-0 /ch3+/selector-0 /ch4+/selector-0 /ch5+/selector-0"); //so the game doesn't play music in the beginning
         ch1Msg = "";
     }
