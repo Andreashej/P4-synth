@@ -122,12 +122,12 @@ void setup() {
     attachInterrupt(digitalPinToInterrupt(MEASURE_PIN), triggered, HIGH);
 
     // supply your own gyro offsets here, scaled for min sensitivity
-    mpu.setXAccelOffset(-387);
-    mpu.setYAccelOffset(-2975);
-    mpu.setZAccelOffset(762);
-    mpu.setXGyroOffset(55);
-    mpu.setYGyroOffset(16);
-    mpu.setZGyroOffset(19);
+    mpu.setXAccelOffset(-529);
+    mpu.setYAccelOffset(-2312);
+    mpu.setZAccelOffset(897);
+    mpu.setXGyroOffset(65);
+    mpu.setYGyroOffset(10);
+    mpu.setZGyroOffset(23);
 
     // make sure it worked (returns 0 if so)
     if (devStatus == 0) {
