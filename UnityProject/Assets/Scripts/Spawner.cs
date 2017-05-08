@@ -12,6 +12,7 @@ public class Spawner : MonoBehaviour
     public GameObject LongNotePrefab;
     public GameMode gameMode;
     public GameObject menuCanvas;
+    public GameObject endGameCanvas;
     public Button btn;
     public TextAsset song;
 
@@ -114,6 +115,7 @@ public class Spawner : MonoBehaviour
                             }
                             currentNote++;
                         }
+                        else endGameCanvas.SetActive(true);
                     }
                 }
             }

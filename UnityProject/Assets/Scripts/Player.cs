@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
 
     public float speed = 5f;
     public string msg;
+    public Text accuracyUI;
     Vector2 screenHalfSizeInWorldUnits;
     float freq;
     float y;
@@ -15,6 +17,11 @@ public class Player : MonoBehaviour
     float spawnBoundary;
     int lanes;
     int waveSelector;
+
+    float flexCounter = 0;
+    float hitCounter = 0;
+    float noteAccuracy;
+
 
     void Start()
     {
@@ -30,13 +37,14 @@ public class Player : MonoBehaviour
         lowestNoteValue = -screenHalfSizeInWorldUnits.y + spawnBoundary + (lowestNotePosition + lowestOctaveOffset) * 2 * (screenHalfSizeInWorldUnits.y - spawnBoundary) / (lanes - 1);
     }
 
-    // Update is called once per frame
     void Update()
     {
         //float inputY = Input.GetAxisRaw("Vertical");
         //float velocity = inputY * speed;
-        //transform.Translate(Vector2.up * velocity * Time.deltaTime);
+        //transform.Translate(Vector2.up * velocity * Time.deltaTime); //keyboard controls
         SetPlayerWaveform();
+        CalculateAccuracy();
+        accuracyUI.text = "Accuracy: " + noteAccuracy.ToString() + "%";
         float[] medians = FindObjectOfType<tcpserver>().GetMedian();
 
 
@@ -51,9 +59,20 @@ public class Player : MonoBehaviour
             y = Mathf.Lerp(lowestNoteValue, highestNoteValue, Mathf.InverseLerp(medians[1], medians[2], medians[0]));
         }
         transform.position = new Vector3(transform.position.x, y, transform.position.z);
+
+        //if flex sensor on, then flexCounter++;
     }
 
-    void OnTriggerEnter2D(Collider2D triggerCollider) //This one is used for scoring
+    void CalculateAccuracy()
+    {
+        if (flexCounter != 0)
+        {
+            noteAccuracy = 100 * hitCounter / flexCounter;
+        }
+        else noteAccuracy = 0;
+    }
+
+    void OnTriggerEnter2D(Collider2D triggerCollider) //This one is for playing notes
     {
         NoteHelper note;
         note.pitch = "";
@@ -88,40 +107,22 @@ public class Player : MonoBehaviour
     void SetPlayerWaveform()
     {
         waveSelector = FindObjectOfType<tcpserver>().selector;
-        if(waveSelector == 0) gameObject.GetComponent<SpriteRenderer>().color = Color.white;
-        else if(waveSelector == 1) gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
-        else if(waveSelector == 2) gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-        else if(waveSelector == 3) gameObject.GetComponent<SpriteRenderer>().color = Color.magenta;
-        else if(waveSelector == 4) gameObject.GetComponent<SpriteRenderer>().color = new Color(1,0.3f,0);
-        else if(waveSelector == 5) gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+        if (waveSelector == 0) gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        else if (waveSelector == 1) gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+        else if (waveSelector == 2) gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        else if (waveSelector == 3) gameObject.GetComponent<SpriteRenderer>().color = Color.magenta;
+        else if (waveSelector == 4) gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0.3f, 0);
+        else if (waveSelector == 5) gameObject.GetComponent<SpriteRenderer>().color = Color.green;
     }
 
-    void OnTriggerStay2D(Collider2D triggerCollider) //This one is used to play note
+    void OnTriggerStay2D(Collider2D triggerCollider) //This one is for scoring
     {
-        /*gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-        NoteHelper note;
-        note.pitch = "";
-        note.waveform = 0;
-        note.octave = 0;
-
-        if (triggerCollider.tag == "Single Note")
-        {
-            note.pitch = triggerCollider.GetComponent<Note>().pitch;
-            note.waveform = (int)triggerCollider.GetComponent<Note>().wave;
-            note.octave = triggerCollider.GetComponent<Note>().octave;
-        }
-        else if (triggerCollider.tag == "Long Note")
-        {
-            note.pitch = triggerCollider.GetComponent<LongNote>().pitch;
-            note.waveform = (int)triggerCollider.GetComponent<LongNote>().wave;
-            note.octave = triggerCollider.GetComponent<LongNote>().octave;
-        }
-        else if (note.pitch != "") Debug.Log(note.pitch + note.waveform + note.octave);*/
-
         //Accuracy counter comes here I guess.
+        //still need to add the flex sensor
+        hitCounter++;
     }
 
-    void OnTriggerExit2D(Collider2D triggerCollider) //This one is used to stop playing note, it may not be needed.
+    void OnTriggerExit2D(Collider2D triggerCollider) //This one is used to stop playing note
     {
         if (triggerCollider.tag != "Head")
         {
