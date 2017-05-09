@@ -35,12 +35,13 @@ public class Backtrack : MonoBehaviour
     void Update()
     {
         gameOn = FindObjectOfType<Spawner>().gameOn;
-        Debug.Log(channel + " " + speed);
+        //Debug.Log(channel + " " + speed);
+        float currTime = FindObjectOfType<Spawner>().currTime;
         if (gameOn)
         {
             if (!turnOFF)
             {
-                if ( true )
+                if (Time.time > delay + currTime)
                 {
                     if (Time.time > nextSpawnTime)
                     {
@@ -48,13 +49,12 @@ public class Backtrack : MonoBehaviour
                         {
                             int noteLength = backtrackNotes[currentNote].length;
 
-
                             if (backtrackNotes[currentNote].pitch == "Break")
                             {
-                                
+
                                 if (!sent)
                                 {
-                                    nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds + (0.64f * noteLength/ speed);
+                                    nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds + (0.64f * noteLength / speed);// + 0.64f / speed;
                                     message = SendStop();
                                     sent = true;
                                 }
@@ -63,27 +63,14 @@ public class Backtrack : MonoBehaviour
                             }
                             else
                             {
-                                
+
                                 if (!sent)
                                 {
-                                    nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds + (0.64f * noteLength / speed);
+                                    nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds + (0.64f * noteLength / speed);// + 0.64f / speed;
                                     message = SendBacktrack(currentNote);
                                     sent = true;
                                 }
                                 Debug.Log(channel + " " + whereWeAre);
-
-
-                                /*if (noteLength == 1)
-                                {
-                                    nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds;
-                                    SendBacktrack(currentNote);
-                                }
-                                else
-                                {
-                                    nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds + (0.64f * (noteLength - 1) / speed);
-                                    SendBacktrack(currentNote);
-
-                                }*/
                             }
 
                             if (whereWeAre == noteLength)

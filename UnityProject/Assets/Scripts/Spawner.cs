@@ -41,17 +41,17 @@ public class Spawner : MonoBehaviour
         screenHalfSizeInWorldUnits = new Vector2(Camera.main.aspect * Camera.main.orthographicSize, Camera.main.orthographicSize);
         songArray = RandomEnumSetter.MakeSongFromText(song);
         currentNote = 0;
-        float dist = screenHalfSizeInWorldUnits.x + 0.64f - FindObjectOfType<Player>().transform.position.x;
+        float dist = screenHalfSizeInWorldUnits.x - FindObjectOfType<Player>().transform.position.x;
         delay = dist / speed;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("1 " + speed);
+        //Debug.Log("1 " + speed);
         if (gameOn)
         {
-            if (Time.time > delay + currTime)
+            if (true)
             {
                 if (Time.time > nextSpawnTime)
                 {

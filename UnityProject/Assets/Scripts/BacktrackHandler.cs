@@ -48,6 +48,7 @@ public class BacktrackHandler : MonoBehaviour
 
     void SendMessage()
     {
+        //ch1Msg = FindObjectOfType<Player>().msg; //keyboard controls
         msg = ch1Msg + " ";
         for (int i = 0; i < backtrackChannels.Length; i++)
         {

@@ -62,14 +62,19 @@
      <Compile Include="Assets\Scripts\applyText.cs" />
      <Compile Include="Assets\Scripts\tcpserver.cs" />
      <None Include="Assets\Resources\Backtrack\channel1.txt" />
+     <None Include="Assets\Resources\Backtrack\nobreak backtrack\Channel3.txt" />
+     <None Include="Assets\Resources\Backtrack\nobreak backtrack\Channel4.txt" />
      <None Include="Assets\Resources\monkeyfixed.txt" />
      <None Include="Assets\Resources\monkey.txt" />
+     <None Include="Assets\Resources\TestBG2.txt" />
      <None Include="Assets\Resources\monkeyfixedbich.txt" />
      <None Include="Assets\Resources\TestBG.txt" />
      <None Include="Assets\Resources\Backtrack\channel3.txt" />
      <None Include="Assets\Resources\Backtrack\channel4.txt" />
      <None Include="Assets\Resources\TestSong.txt" />
+     <None Include="Assets\Resources\Backtrack\nobreak backtrack\Channel1.txt" />
      <None Include="Assets\Resources\Backtrack\channel2.txt" />
+     <None Include="Assets\Resources\Backtrack\nobreak backtrack\Channel2.txt" />
      <None Include="Assets\Resources\Backtrack\Channel1_sine.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

@@ -39,9 +39,9 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        //float inputY = Input.GetAxisRaw("Vertical");
-        //float velocity = inputY * speed;
-        //transform.Translate(Vector2.up * velocity * Time.deltaTime); //keyboard controls
+        /*float inputY = Input.GetAxisRaw("Vertical");
+        float velocity = inputY * speed;
+        transform.Translate(Vector2.up * velocity * Time.deltaTime); //keyboard controls*/
         SetPlayerWaveform();
         CalculateAccuracy();
         accuracyUI.text = "Accuracy: " + noteAccuracy.ToString() + "%";
@@ -60,6 +60,8 @@ public class Player : MonoBehaviour
         }
         transform.position = new Vector3(transform.position.x, y, transform.position.z);
 
+        
+        
         //if flex sensor on, then flexCounter++;
     }
 
