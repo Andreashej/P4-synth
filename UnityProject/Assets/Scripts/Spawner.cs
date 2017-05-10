@@ -12,7 +12,6 @@ public class Spawner : MonoBehaviour
     public GameObject LongNotePrefab;
     public GameMode gameMode;
     public GameObject menuCanvas;
-    public GameObject endGameCanvas;
     public Button btn;
     public TextAsset song;
 
@@ -119,10 +118,8 @@ public class Spawner : MonoBehaviour
                         }
                         else
                         {
-                            currTime = Time.time;
-                            if (Time.time > currTime + 0.64f * 17 / speed)
+                            if (Time.time > delay + (songArray.Length + 2) * 0.64f / speed)
                             {
-                                endGameCanvas.SetActive(true);
                                 gameOn = false;
                             }
                         }

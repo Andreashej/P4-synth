@@ -8,7 +8,6 @@ public class Player : MonoBehaviour
 
     public float speed = 5f;
     public string msg;
-    public Text accuracyUI;
     Vector2 screenHalfSizeInWorldUnits;
     float freq;
     float y;
@@ -21,7 +20,7 @@ public class Player : MonoBehaviour
     bool gameOn;
     float flexCounter = 0;
     float hitCounter = 0;
-    float noteAccuracy;
+    public float noteAccuracy;
 
 
     void Start()
@@ -51,7 +50,6 @@ public class Player : MonoBehaviour
             if (flexOn) flexCounter++;
             CalculateAccuracy();
         }
-        accuracyUI.text = "Accuracy: " + noteAccuracy.ToString() + "%";
         float[] medians = FindObjectOfType<tcpserver>().GetMedian();
 
 
@@ -81,6 +79,7 @@ public class Player : MonoBehaviour
             noteAccuracy = 100 * hitCounter / flexCounter;
         }
         else noteAccuracy = 0;
+        Debug.Log(noteAccuracy);
     }
 
     void OnTriggerEnter2D(Collider2D triggerCollider) //This one is for playing notes

@@ -58,7 +58,7 @@ public class Backtrack : MonoBehaviour
                                     message = SendStop();
                                     sent = true;
                                 }
-                                Debug.Log(channel + " " + whereWeAre);
+                                //Debug.Log(channel + " " + whereWeAre);
 
                             }
                             else
@@ -70,7 +70,7 @@ public class Backtrack : MonoBehaviour
                                     message = SendBacktrack(currentNote);
                                     sent = true;
                                 }
-                                Debug.Log(channel + " " + whereWeAre);
+                                //Debug.Log(channel + " " + whereWeAre);
                             }
 
                             if (whereWeAre == noteLength)
