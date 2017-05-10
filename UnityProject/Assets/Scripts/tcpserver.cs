@@ -34,7 +34,7 @@ public class tcpserver : MonoBehaviour
     public float fromNote = RandomEnumSetter.CalculateGMajorPosition("F#", 1);
     public float toNote = RandomEnumSetter.CalculateGMajorPosition("C", 3);
 
-    int flex;
+    public int flex;
     float freq;
     int RotY;
     int RotX;

@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     float spawnBoundary;
     int lanes;
     int waveSelector;
-
+    bool flexOn;
     float flexCounter = 0;
     float hitCounter = 0;
     float noteAccuracy;
@@ -42,6 +42,8 @@ public class Player : MonoBehaviour
         /*float inputY = Input.GetAxisRaw("Vertical");
         float velocity = inputY * speed;
         transform.Translate(Vector2.up * velocity * Time.deltaTime); //keyboard controls*/
+        IsFlexOn();
+        if (flexOn) flexCounter++;
         SetPlayerWaveform();
         CalculateAccuracy();
         accuracyUI.text = "Accuracy: " + noteAccuracy.ToString() + "%";
@@ -59,10 +61,12 @@ public class Player : MonoBehaviour
             y = Mathf.Lerp(lowestNoteValue, highestNoteValue, Mathf.InverseLerp(medians[1], medians[2], medians[0]));
         }
         transform.position = new Vector3(transform.position.x, y, transform.position.z);
+    }
 
-        
-        
-        //if flex sensor on, then flexCounter++;
+    void IsFlexOn()
+    {
+        if (FindObjectOfType<tcpserver>().flex > 720) flexOn = true;
+        else flexOn = false;
     }
 
     void CalculateAccuracy()
@@ -112,16 +116,32 @@ public class Player : MonoBehaviour
         if (waveSelector == 0) gameObject.GetComponent<SpriteRenderer>().color = Color.white;
         else if (waveSelector == 1) gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
         else if (waveSelector == 2) gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-        else if (waveSelector == 3) gameObject.GetComponent<SpriteRenderer>().color = Color.magenta;
-        else if (waveSelector == 4) gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0.3f, 0);
-        else if (waveSelector == 5) gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+        else if (waveSelector == 3) gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0.3f, 0);
+        else if (waveSelector == 4) gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+        else if (waveSelector == 5) gameObject.GetComponent<SpriteRenderer>().color = Color.magenta;
     }
 
     void OnTriggerStay2D(Collider2D triggerCollider) //This one is for scoring
     {
         //Accuracy counter comes here I guess.
         //still need to add the flex sensor
-        hitCounter++;
+        if (flexOn)
+        {
+            if (triggerCollider.tag == "Note")
+            {
+                if (waveSelector == (int)triggerCollider.GetComponent<Note>().wave)
+                {
+                    hitCounter++;
+                }
+            }
+            else if (triggerCollider.tag == "Long Note")
+            {
+                if (waveSelector == (int)triggerCollider.GetComponent<LongNote>().wave)
+                {
+                    hitCounter++;
+                }
+            }
+        }
     }
 
     void OnTriggerExit2D(Collider2D triggerCollider) //This one is used to stop playing note
