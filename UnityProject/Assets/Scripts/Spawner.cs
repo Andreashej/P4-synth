@@ -117,19 +117,27 @@ public class Spawner : MonoBehaviour
                             }
                             currentNote++;
                         }
-                        else endGameCanvas.SetActive(true);
+                        else
+                        {
+                            currTime = Time.time;
+                            if (Time.time > currTime + 0.64f * 17 / speed)
+                            {
+                                endGameCanvas.SetActive(true);
+                                gameOn = false;
+                            }
+                        }
                     }
                 }
             }
         }
     }
 
-void StartGame()
-{
-    gameOn = true;
-    menuCanvas.SetActive(false);
-    currTime = Time.time;
-}
+    void StartGame()
+    {
+        gameOn = true;
+        menuCanvas.SetActive(false);
+        currTime = Time.time;
+    }
 
 }
 

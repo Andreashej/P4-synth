@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     int lanes;
     int waveSelector;
     bool flexOn;
+    bool gameOn;
     float flexCounter = 0;
     float hitCounter = 0;
     float noteAccuracy;
@@ -42,10 +43,14 @@ public class Player : MonoBehaviour
         /*float inputY = Input.GetAxisRaw("Vertical");
         float velocity = inputY * speed;
         transform.Translate(Vector2.up * velocity * Time.deltaTime); //keyboard controls*/
-        IsFlexOn();
-        if (flexOn) flexCounter++;
+        gameOn = FindObjectOfType<Spawner>().gameOn;
         SetPlayerWaveform();
-        CalculateAccuracy();
+        if (gameOn)
+        {
+            IsFlexOn();
+            if (flexOn) flexCounter++;
+            CalculateAccuracy();
+        }
         accuracyUI.text = "Accuracy: " + noteAccuracy.ToString() + "%";
         float[] medians = FindObjectOfType<tcpserver>().GetMedian();
 
