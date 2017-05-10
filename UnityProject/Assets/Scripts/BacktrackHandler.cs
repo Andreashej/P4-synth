@@ -36,14 +36,14 @@ public class BacktrackHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameOn = FindObjectOfType<Spawner>().gameOn;
-        if (gameOn)
-        {
-            if (Time.time > delay)
-            {
+        //gameOn = FindObjectOfType<Spawner>().gameOn;
+        //if (gameOn)
+        //{
+            //if (Time.time > delay)
+            //{
                 SendMessage();
-            }
-        }
+            //}
+        //}
     }
 
     void SendMessage()
