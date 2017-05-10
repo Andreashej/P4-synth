@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-public enum Waveform { None, Sine, Triangle, Square, Sawtooth, Pulse };
+public enum Waveform { None, Sine, Sawtooth, Triangle, Pulse, Square };
 
 public static class RandomEnumSetter
 {
