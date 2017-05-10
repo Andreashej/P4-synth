@@ -116,7 +116,7 @@ public class Player : MonoBehaviour
 
     void SetPlayerWaveform()
     {
-        waveSelector = FindObjectOfType<tcpserver>().selector;
+        waveSelector = FindObjectOfType<tcpserver>().showWave;
         if (waveSelector == 0) gameObject.GetComponent<SpriteRenderer>().color = Color.white;
         else if (waveSelector == 1) gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
         else if (waveSelector == 2) gameObject.GetComponent<SpriteRenderer>().color = Color.red;

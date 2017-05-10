@@ -17,6 +17,7 @@ public class tcpserver : MonoBehaviour
     int triangle = 3;
     int pulse = 4;
     int square = 5;
+    public int showWave;
     float[] freqs = new float[11];
     private float median;
     int count = 0;
@@ -62,6 +63,27 @@ public class tcpserver : MonoBehaviour
     void Update()
     {
         string selectorMsg = "+/selector-";
+
+        if (RotX > 15)
+        {
+            showWave = pulse;
+        }
+        else if (RotX < -20)
+        {
+            showWave = triangle;
+        }
+        else if (RotY > 20)
+        {
+            showWave = square;
+        }
+        else if (RotY < -20)
+        {
+            showWave = sawtooth;
+        }
+        else
+        {
+            showWave = sine;
+        }
 
         if (flex > 720)
         {
