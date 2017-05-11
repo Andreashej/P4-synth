@@ -82,7 +82,7 @@ public class tcpserver : MonoBehaviour
             showWave = sine;
         }
 
-        if (flex > 720)
+        if (flex > 750)
         {
             if (RotX > 15)
             {

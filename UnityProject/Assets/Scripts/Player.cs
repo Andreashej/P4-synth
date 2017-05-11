@@ -95,7 +95,7 @@ public class Player : MonoBehaviour
             float freq = RandomEnumSetter.CalculateFrequency(note.pitch, note.octave);
 
             msg = "/ch1" + "+/freq-" + freq.ToString();
-            Debug.Log("Actual freq: " + freq + "Freq played: " + FindObjectOfType<tcpserver>().freqMedian);
+            //Debug.Log("Actual freq: " + freq + "Freq played: " + FindObjectOfType<tcpserver>().freqMedian);
             msg += "+/selector-" + note.waveform.ToString();
 
 
@@ -107,7 +107,7 @@ public class Player : MonoBehaviour
             note.waveform = (int)triggerCollider.GetComponent<LongNote>().wave;
             note.octave = triggerCollider.GetComponent<LongNote>().octave;
             float freq = RandomEnumSetter.CalculateFrequency(note.pitch, note.octave);
-            Debug.Log("Actual freq: " + freq + "Freq played: " + FindObjectOfType<tcpserver>().freqMedian);
+            //Debug.Log("Actual freq: " + freq + "Freq played: " + FindObjectOfType<tcpserver>().freqMedian);
             msg = "/ch1" + "+/freq-" + freq.ToString();
             msg += "+/selector-" + note.waveform.ToString();
         }
