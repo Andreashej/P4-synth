@@ -17,7 +17,7 @@ public class Spawner : MonoBehaviour
 
 
     [Range(1, 16)]
-    public int spaceBetweenNotes = 1;
+    public int spaceBetweenNotes = 1; //don't change it it will ruin everything
     public float speed;
     public int lanes = 5;
     public float spawnBoundary = 0.32f;
@@ -31,12 +31,11 @@ public class Spawner : MonoBehaviour
     public bool gameOn = false;
     public float currTime;
 
-    // Use this for initialization
     void Start()
     {
         btn.onClick.AddListener(StartGame);
         timeBetweenSpawnsInSeconds = 60f / beatsPerMinute;
-        speed = spaceBetweenNotes * 0.64f / timeBetweenSpawnsInSeconds; //the coefficient before 0.64f dictates how many "empty" notes are between notes.
+        speed = spaceBetweenNotes * 0.64f / timeBetweenSpawnsInSeconds;
         screenHalfSizeInWorldUnits = new Vector2(Camera.main.aspect * Camera.main.orthographicSize, Camera.main.orthographicSize);
         songArray = RandomEnumSetter.MakeSongFromText(song);
         currentNote = 0;
@@ -44,10 +43,8 @@ public class Spawner : MonoBehaviour
         delay = dist / speed;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //Debug.Log("1 " + speed);
         if (gameOn)
         {
             if (true)
@@ -90,7 +87,6 @@ public class Spawner : MonoBehaviour
                                 int octaveOffset = (songArray[currentNote].octave - 1) * 8;
 
                                 Vector2 spawnPosition = new Vector2(screenHalfSizeInWorldUnits.x + 0.64f, -screenHalfSizeInWorldUnits.y + spawnBoundary + (notePosition + octaveOffset) * 2 * (screenHalfSizeInWorldUnits.y - spawnBoundary) / (lanes - 1));
-                                //Debug.Log(RandomEnumSetter.noteFreqAndPos[songArray[currentNote].pitch]);
                                 if (noteLength == 1)
                                 {
                                     nextSpawnTime = Time.time + timeBetweenSpawnsInSeconds;
@@ -100,7 +96,6 @@ public class Spawner : MonoBehaviour
                                     newNote.GetComponent<Note>().octave = songArray[currentNote].octave;
                                     newNote.GetComponent<Note>().wave = (Waveform)songArray[currentNote].waveform;
                                     newNote.GetComponent<Note>().SetColor((Waveform)songArray[currentNote].waveform);
-                                    //Debug.Log(songArray[currentNote].pitch);
                                 }
                                 else
                                 {
@@ -111,7 +106,6 @@ public class Spawner : MonoBehaviour
                                     newLongNote.GetComponent<LongNote>().pitch = songArray[currentNote].pitch;
                                     newLongNote.GetComponent<LongNote>().octave = songArray[currentNote].octave;
                                     newLongNote.GetComponent<LongNote>().wave = (Waveform)songArray[currentNote].waveform;
-                                    // Debug.Log(songArray[currentNote].pitch);
                                 }
                             }
                             currentNote++;
@@ -121,6 +115,7 @@ public class Spawner : MonoBehaviour
                             if (Time.time > delay + (songArray.Length + 2) * 0.64f / speed)
                             {
                                 gameOn = false;
+                                Debug.Log(FindObjectOfType<Player>().noteAccuracy);
                             }
                         }
                     }
@@ -136,13 +131,4 @@ public class Spawner : MonoBehaviour
         currTime = Time.time;
     }
 
-}
-
-
-public struct NoteHelper
-{
-    public string pitch;
-    public int octave;
-    public int waveform;
-    public int length;
 }

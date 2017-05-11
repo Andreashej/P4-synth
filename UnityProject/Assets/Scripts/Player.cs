@@ -79,7 +79,6 @@ public class Player : MonoBehaviour
             noteAccuracy = 100 * hitCounter / flexCounter;
         }
         else noteAccuracy = 0;
-        Debug.Log(noteAccuracy);
     }
 
     void OnTriggerEnter2D(Collider2D triggerCollider) //This one is for playing notes
@@ -127,8 +126,6 @@ public class Player : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D triggerCollider) //This one is for scoring
     {
-        //Accuracy counter comes here I guess.
-        //still need to add the flex sensor
         if (flexOn)
         {
             if (triggerCollider.tag == "Note")
@@ -152,7 +149,6 @@ public class Player : MonoBehaviour
     {
         if (triggerCollider.tag != "Head")
         {
-            //gameObject.GetComponent<SpriteRenderer>().color = Color.white;
             msg = "/ch1+/selector-0";
         }
     }

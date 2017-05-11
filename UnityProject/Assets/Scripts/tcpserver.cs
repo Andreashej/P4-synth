@@ -45,8 +45,6 @@ public class tcpserver : MonoBehaviour
     public Toggle discreteToggle;
     public bool discrete;
 
-
-    // Use this for initialization
     void Start()
     {
         discrete = false;
@@ -59,7 +57,6 @@ public class tcpserver : MonoBehaviour
         Arduino.NewDataEvent += NewData;
     }
 
-    // Update is called once per frame
     void Update()
     {
         string selectorMsg = "+/selector-";

@@ -9,7 +9,6 @@ public enum Waveform { None, Sine, Sawtooth, Triangle, Pulse, Square };
 public static class RandomEnumSetter
 {
     public static string[] colors = { "white", "blue", "red", "orange", "green", "pink" };
-    //public const int _A0 = 110;
     public static Dictionary<string, int> noteFreqAndPos = new Dictionary<string, int>()
     {
         {"A", 0},
@@ -96,4 +95,12 @@ public static class RandomEnumSetter
         return songAsNotes;
     }
 
+}
+
+public struct NoteHelper
+{
+    public string pitch;
+    public int octave;
+    public int waveform;
+    public int length;
 }
